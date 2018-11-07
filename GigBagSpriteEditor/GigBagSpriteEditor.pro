@@ -26,10 +26,13 @@ CONFIG += c++11
 
 SOURCES += \
         main.cpp \
-        spriteeditorwindow.cpp
+        spriteeditorwindow.cpp \
+    scribblearea.cpp
 
 HEADERS += \
-        spriteeditorwindow.h
+        spriteeditorwindow.h \
+    scribblearea.h \
+    scribblearea.h
 
 FORMS += \
         spriteeditorwindow.ui
