@@ -30,9 +30,110 @@
       <x>10</x>
       <y>59</y>
       <width>120</width>
-      <height>251</height>
+      <height>291</height>
      </rect>
     </property>
+    <widget class="QGroupBox" name="brushToolBox">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>121</width>
+       <height>291</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string>Brush Tools</string>
+     </property>
+     <widget class="QPushButton" name="dotBrushButton">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>80</y>
+        <width>101</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Dot</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="lineBrushButton">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>130</y>
+        <width>101</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Line</string>
+      </property>
+     </widget>
+     <widget class="QSlider" name="brushSizeSlider">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>50</y>
+        <width>71</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="rectangleBrushButton">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>180</y>
+        <width>101</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Rectangle</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="circleBrushButton">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>230</y>
+        <width>101</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Circle</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="brushSizeLabel">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>30</y>
+        <width>71</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Brush Size</string>
+      </property>
+     </widget>
+     <widget class="QSpinBox" name="spinBox">
+      <property name="geometry">
+       <rect>
+        <x>80</x>
+        <y>50</y>
+        <width>31</width>
+        <height>21</height>
+       </rect>
+      </property>
+     </widget>
+    </widget>
    </widget>
    <widget class="QWidget" name="timelineWidget" native="true">
     <property name="geometry">
@@ -41,6 +142,16 @@
       <y>59</y>
       <width>120</width>
       <height>251</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QWidget" name="colorPickerWidget" native="true">
+    <property name="geometry">
+     <rect>
+      <x>9</x>
+      <y>369</y>
+      <width>121</width>
+      <height>121</height>
      </rect>
     </property>
    </widget>
@@ -63,7 +174,13 @@
     <addaction name="actionSave"/>
     <addaction name="actionSave_As"/>
    </widget>
+   <widget class="QMenu" name="menuHelp">
+    <property name="title">
+     <string>Help</string>
+    </property>
+   </widget>
    <addaction name="menuFile"/>
+   <addaction name="menuHelp"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
