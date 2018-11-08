@@ -17,6 +17,9 @@ public:
 
 private:
     Ui::SpriteEditorWindow *ui;
+
+private slots:
+    void drawLine();
 };
 
 #endif // SPRITEEDITORWINDOW_H

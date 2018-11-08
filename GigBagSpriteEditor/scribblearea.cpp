@@ -1,16 +1,27 @@
+#include <QtWidgets>
+#if defined(QT_PRINTSUPPORT_LIB)
+#include <QtPrintSupport/qtprintsupportglobal.h>
+#if QT_CONFIG(printdialog)
+#include <QPrinter>
+#include <QPrintDialog>
+#endif
+#endif
+
 #include "scribblearea.h"
-#include <QMouseEvent>
-#include <QPainter>
+//#include <QMouseEvent>
+//#include <QPainter>
 //#include <QtConfig>
 
-ScribbleArea::ScribbleArea(QWidget *parent): QWidget(parent)
+ScribbleArea::ScribbleArea(QWidget *parent) : QWidget(parent)
 {
     setAttribute(Qt::WA_StaticContents);
     modified = false;
     scribbling = false;
-    myPenWidth = 1;
-    myPenColor = Qt::blue;
+    myPenWidth = 10;
+    myPenColor = Qt::black;
 }
+
+//ScribbleArea::~ScribbleArea(){}
 
 bool ScribbleArea::openImage(const QString &fileName)
 {
@@ -102,8 +113,8 @@ void ScribbleArea::resizeEvent(QResizeEvent *event)
 void ScribbleArea::drawLineTo(const QPoint &endPoint)
 {
     QPainter painter(&image);
-    painter.setPen(QPen(myPenColor, myPenWidth, Qt::SolidLine, Qt::RoundCap,
-                        Qt::RoundJoin));
+    painter.setPen(QPen(myPenColor, myPenWidth, Qt::SolidLine, Qt::SquareCap,
+                        Qt::BevelJoin));
     painter.drawLine(lastPoint, endPoint);
     modified = true;
 

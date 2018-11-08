@@ -1,13 +1,23 @@
 #ifndef SCRIBBLEAREA_H
 #define SCRIBBLEAREA_H
 
+#include <QColor>
+#include <QImage>
+#include <QPoint>
 #include <QObject>
 #include <QWidget>
 
 class ScribbleArea : public QWidget
 {
-    ScribbleArea(QWidget *parent = 0);
+//    Q_OBJECT
 
+public:
+    ScribbleArea(QWidget *parent = 0);
+//    ~ScribbleArea();
+//    ScribbleArea(const ScribbleArea& other);
+//    ScribbleArea& operator=(ScribbleArea other);
+    QImage image;
+private:
         bool openImage(const QString &fileName);
         bool saveImage(const QString &fileName, const char *fileFormat);
         void setPenColor(const QColor &newColor);
@@ -36,7 +46,7 @@ class ScribbleArea : public QWidget
         bool scribbling;
         int myPenWidth;
         QColor myPenColor;
-        QImage image;
+//        QImage image;
         QPoint lastPoint;
 };
 
