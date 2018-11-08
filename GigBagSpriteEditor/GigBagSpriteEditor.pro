@@ -27,12 +27,20 @@ CONFIG += c++11
 SOURCES += \
         main.cpp \
         spriteeditorwindow.cpp \
+<<<<<<< HEAD
     scribblearea.cpp
 
 HEADERS += \
         spriteeditorwindow.h \
     scribblearea.h \
     scribblearea.h
+=======
+    FramesModel.cpp
+
+HEADERS += \
+        spriteeditorwindow.h \
+    FramesModel.h
+>>>>>>> 8e2b7a968b94f1db850e8cc9c39f42145ce163c7
 
 FORMS += \
         spriteeditorwindow.ui
