@@ -33,10 +33,10 @@ SOURCES += \
 HEADERS += \
         spriteeditorwindow.h \
         scribblearea.h \
-        scribblearea.h
+        FramesModel.h \
 
 FORMS += \
-        spriteeditorwindow.ui
+        spriteeditorwindow.ui \
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
