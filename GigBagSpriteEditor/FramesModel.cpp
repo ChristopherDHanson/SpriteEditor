@@ -14,5 +14,12 @@ FramesModel::FramesModel(const FramesModel& other)
 }
 FramesModel& FramesModel::operator=(FramesModel framesToCopy)
 {
-  return nullptr;
+  return *this;
+}
+
+void FramesModel::saveAsSSP() {
+
+}
+void FramesModel::saveAsGIF() {
+
 }

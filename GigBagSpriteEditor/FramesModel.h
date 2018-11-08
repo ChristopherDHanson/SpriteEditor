@@ -1,11 +1,15 @@
+#include <QMainWindow>
 
 class FramesModel {
 private:
-  int frames[256][256];
+  QVector<QImage> frames;
 public:
   FramesModel();
   FramesModel(int width, int height);
   ~FramesModel();
   FramesModel(const FramesModel& other);
   FramesModel& operator=(FramesModel framesToCopy);
+
+  void saveAsSSP();
+  void saveAsGIF();
 };
