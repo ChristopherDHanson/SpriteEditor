@@ -1,4 +1,5 @@
 #include <QMainWindow>
+#include <fstream>
 
 class FramesModel {
 private:
@@ -10,6 +11,6 @@ public:
   FramesModel(const FramesModel& other);
   FramesModel& operator=(FramesModel framesToCopy);
 
-  void saveAsSSP();
-  void saveAsGIF();
+  void saveAsSSP(std::string fileName);
+  void saveAsGIF(std::string fileName);
 };
