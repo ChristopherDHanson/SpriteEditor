@@ -13,4 +13,5 @@ public:
 
   void saveAsSSP(std::string filename);
   void saveAsGIF(std::string filename);
+  QVector<QImage> openSSP(std::string filepath);
 };
