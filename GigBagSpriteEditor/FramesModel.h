@@ -4,12 +4,15 @@
 class FramesModel {
 private:
   QVector<QImage> frames;
+  int height, width;
 public:
   FramesModel();
   FramesModel(int width, int height);
   ~FramesModel();
   FramesModel(const FramesModel& other);
   FramesModel& operator=(FramesModel framesToCopy);
+
+  QVector<QImage> getFrames();
 
   // Should be called whenever user adds new frame to their sprite
   void addFrame(QImage newFrame);
