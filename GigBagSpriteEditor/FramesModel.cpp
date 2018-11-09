@@ -17,6 +17,22 @@ FramesModel& FramesModel::operator=(FramesModel framesToCopy)
     return *this;
 }
 
+void FramesModel::addFrame(QImage newFrame) {
+    frames.push_back(newFrame);
+}
+void FramesModel::saveFrame(int frameIndex, QImage frame) {
+    if (frameIndex < frames.size())
+        frames[frameIndex] = frame;
+}
+void FramesModel::swapFrameOrder(int firstIndex, int secondIndex) {
+    if (firstIndex < frames.length() && secondIndex < frames.length()) {
+        QImage temp = frames[firstIndex];
+        frames[firstIndex] = frames[secondIndex];
+        frames[secondIndex] = temp;
+    }
+}
+
+
 void FramesModel::saveAsSSP(std::string fileName) {
       std::ofstream outfile (fileName + ".ssp");
       int height = 0, width = 0;
@@ -25,9 +41,21 @@ void FramesModel::saveAsSSP(std::string fileName) {
       outfile << frames.length() << "\n";
       // Output data
       for (QImage frame : frames) {
-          outfile << "my text here!" << std::endl;
+          for ( int row = 1; row < frame.height() + 1; ++row ) {
+              for ( int col = 1; col < frame.width() + 1; ++col )
+              {
+                  QColor clrCurrent( frame.pixel( row, col ) );
+
+                  outfile
+                            << clrCurrent.red() << " "
+                            << clrCurrent.green() << " "
+                            << clrCurrent.blue() << " "
+                            << clrCurrent.alpha() << " "
+                            << std::endl;
+              }
+          }
       }
-       outfile.close();
+      outfile.close();
 }
 void FramesModel::saveAsGIF(std::string fileName) {
 
