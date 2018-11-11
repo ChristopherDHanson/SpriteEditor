@@ -2,7 +2,7 @@
 
 FramesModel::FramesModel()
 {
-  
+
 }
 FramesModel::~FramesModel()
 {
@@ -29,7 +29,15 @@ void FramesModel::saveAsSSP(std::string fileName) {
       }
        outfile.close();
 }
-void FramesModel::saveAsGIF(std::string fileName) {
+void FramesModel::saveAsGIF(std::string filePath)
+{
+    //get properties from vector of images, and store as vars
+        //palette
+        //size
+        //etc
+
+    //create new gif object from properties
+    //save to given filepath name in args
 
 }
 
