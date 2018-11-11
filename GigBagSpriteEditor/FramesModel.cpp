@@ -63,14 +63,31 @@ void FramesModel::saveAsSSP(std::string fileName) {
 }
 void FramesModel::saveAsGIF(std::string filePath)
 {
-    //get properties from vector of images, and store as vars
-        //palette
-        //size
-        //etc
+    //create gifwriter
+    GifWriter newGifFile;
 
-    //create new gif object from properties
-    //save to given filepath name in args
+    //initialize writer
+    GifBegin(newGifFile, filePath, width, height, 10);
 
+    //take each current frame and write it
+    for (size_t i = 0; i < frames.length(); i++)
+    {
+      QImage temp = frames[i];
+      QByteArray arr;
+      QBuffer buffer(&arr);
+      buffer.open(QIODevice::WriteOnly);
+      img_enrll.save(&buffer, "");
+
+      GifWriteFrame(newGifFile, arr, width, height, 10);
+    }
+
+    //complete EOF code
+    GifEnd(newGifFile);
+
+    //safe file to stream
+    std::ofstream outfile (fileName + ".gif");
+    outfile << newGifFile.f;
+    outfile.close();
 }
 
 QVector<QImage> FramesModel::openSSP(std::string filepath) {
