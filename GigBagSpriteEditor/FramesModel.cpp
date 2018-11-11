@@ -1,4 +1,5 @@
 #include "FramesModel.h"
+#include "gif.h"
 
 FramesModel::FramesModel()
 {
