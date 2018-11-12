@@ -79,7 +79,10 @@ void FramesModel::saveAsGIF(std::string filePath)
       buffer.open(QIODevice::WriteOnly);
       original.save(&buffer, "");
 
-      GifWriteFrame(&newGifFile, imageByteArr, width, height, 10, 8, false);
+      char* imageData = imageByteArr.data();
+      uint8_t* imagedate8t = (uint8_t*)imageData;
+
+      GifWriteFrame(&newGifFile, imagedate8t, width, height, 10, 8, false);
     }
 
     //complete EOF code
