@@ -1,4 +1,5 @@
 #include <QMainWindow>
+#include <QBuffer>
 #include <fstream>
 
 class FramesModel {

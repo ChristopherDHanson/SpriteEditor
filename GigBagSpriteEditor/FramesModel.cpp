@@ -78,7 +78,7 @@ void FramesModel::saveAsGIF(std::string filePath)
       buffer.open(QIODevice::WriteOnly);
       img_enrll.save(&buffer, "");
 
-      GifWriteFrame(newGifFile, arr, width, height, 10);
+      GifWriteFrame(&newGifFile, arr, width, height, 10);
     }
 
     //complete EOF code
