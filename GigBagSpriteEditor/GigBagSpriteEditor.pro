@@ -34,6 +34,7 @@ HEADERS += \
         spriteeditorwindow.h \
         scribblearea.h \
         FramesModel.h \
+        gif.h \
 
 FORMS += \
         spriteeditorwindow.ui \

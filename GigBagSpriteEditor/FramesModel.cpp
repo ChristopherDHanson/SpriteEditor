@@ -67,7 +67,7 @@ void FramesModel::saveAsGIF(std::string filePath)
     GifWriter newGifFile;
 
     //initialize writer
-    GifBegin(newGifFile, filePath, width, height, 10);
+    GifBegin(&newGifFile, filePath.c_str(), width, height, 10);
 
     //take each current frame and write it
     for (size_t i = 0; i < frames.length(); i++)
@@ -82,10 +82,10 @@ void FramesModel::saveAsGIF(std::string filePath)
     }
 
     //complete EOF code
-    GifEnd(newGifFile);
+    GifEnd(&newGifFile);
 
     //safe file to stream
-    std::ofstream outfile (fileName + ".gif");
+    std::ofstream outfile (filePath + ".gif");
     outfile << newGifFile.f;
     outfile.close();
 }
