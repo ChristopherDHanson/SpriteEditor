@@ -80,9 +80,9 @@ void FramesModel::saveAsGIF(std::string filePath)
       original.save(&buffer, "");
 
       char* imageData = imageByteArr.data();
-      uint8_t* imagedate8t = (uint8_t*)imageData;
+      uint8_t* imageData8t = (uint8_t*)imageData;
 
-      GifWriteFrame(&newGifFile, imagedate8t, width, height, 10, 8, false);
+      GifWriteFrame(&newGifFile, imageData8t, width, height, 10, 8, false);
     }
 
     //complete EOF code
