@@ -109,12 +109,46 @@ QVector<QImage> FramesModel::openSSP(std::string filepath) {
     getline(fileToOpen, currentLine);
     int numberOfFrames = std::stoi(currentLine);
 
+    frames.clear();
+    for (int frameNum = 0; frameNum < numberOfFrames; frameNum++) {
+        QImage q(width, height, QImage::Format_RGB32);
+        frames.push_back(q);
+    }
+
     // Get frame data and put it into frames
     for (int currentFrameNumber = 0; currentFrameNumber < numberOfFrames; currentFrameNumber++) {
         QImage currentFrame;
-        // get pixel data for this frame
-        // assemble qimage for this frame
-        // add qimage to frames
-        frames.push_back(currentFrame);
+        QColor currentColor;
+        for (int currentRowNumber = 0; currentRowNumber < height; currentRowNumber++) {
+            getline(fileToOpen, currentLine);
+            for (int pixelInRowIndex = 0; pixelInRowIndex < width; pixelInRowIndex++) {
+                // red
+                pos = currentLine.find(delimiter);
+                token = currentLine.substr(0, pos);
+                int red = std::stoi(token);
+                currentLine.erase(0, pos + delimiter.length());
+
+                // green
+                pos = currentLine.find(delimiter);
+                token = currentLine.substr(0, pos);
+                int green = std::stoi(token);
+                currentLine.erase(0, pos + delimiter.length());
+
+                // blue
+                pos = currentLine.find(delimiter);
+                token = currentLine.substr(0, pos);
+                int blue = std::stoi(token);
+                currentLine.erase(0, pos + delimiter.length());
+
+                // alpha
+                pos = currentLine.find(delimiter);
+                token = currentLine.substr(0, pos);
+                int alpha = std::stoi(token);
+                currentLine.erase(0, pos + delimiter.length());
+
+                currentColor.setRgb(red, green, blue, alpha);
+                frames[currentFrameNumber].setPixelColor(pixelInRowIndex, currentRowNumber, currentColor);
+            }
+        }
     }
 }
