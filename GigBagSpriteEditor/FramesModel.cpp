@@ -24,15 +24,24 @@ QVector<QImage> FramesModel::getFrames() {
     return frames;
 }
 
-void FramesModel::addFrame() {
+void FramesModel::addDuplicateFrame() {
     QImage temp;
     if (frames.length() > 0) {
         temp = frames[frames.length() - 1];
     }
     frames.push_back(temp);
 }
+void FramesModel::addNewFrame() {
+    QImage temp;
+    if (frames.length() > 0) {
+        temp = QImage(frames[frames.length() - 1].size(), QImage::Format_RGB32);
+    }
+    frames.push_back(temp);
+}
 void FramesModel::deleteFrame(int index) {
-    frames.remove(index);
+    if (index >= 0 && index < frames.length() - 1) {
+        frames.remove(index);
+    }
 }
 void FramesModel::saveFrame(int frameIndex, QImage frame) {
     if (frameIndex < frames.size())

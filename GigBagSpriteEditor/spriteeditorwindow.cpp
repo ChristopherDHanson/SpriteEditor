@@ -58,7 +58,7 @@ void SpriteEditorWindow::saveAsFile() {
 }
 void SpriteEditorWindow::addFrame() {
     std::cout << "add frame\n";
-    model.addFrame();
+    model.addDuplicateFrame();
 }
 void SpriteEditorWindow::deleteFrame() {
    std::cout << "delete frame\n";
