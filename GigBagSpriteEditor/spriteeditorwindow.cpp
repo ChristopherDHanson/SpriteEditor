@@ -8,8 +8,14 @@ SpriteEditorWindow::SpriteEditorWindow(QWidget *parent) :
 {
     currentFrameIndex = 0;
     ui->setupUi(this);
-    //ScribbleArea* sa = new ScribbleArea;
-    connect(ui->lineBrushButton, &QPushButton::pressed, this, &SpriteEditorWindow::drawLine);
+
+    connect(ui->brushSizeSlider, SIGNAL(sliderReleased()), this, SLOT(sliderChangeBrushSize()));
+    connect(ui->spinBox, SIGNAL(valueChanged(int)), this, SLOT(spinBoxChangeBrushSize()));
+    connect(ui->dotBrushButton, SIGNAL(released()), this, SLOT(pencilDraw()));
+    connect(ui->lineBrushButton, SIGNAL(released()), this, SLOT(lineDraw()));
+    connect(ui->eraserButton, SIGNAL(released()), this, SLOT(eraser()));
+    connect(ui->rectangleBrushButton, SIGNAL(released()), this, SLOT(rectDraw()));
+    connect(ui->circleBrushButton, SIGNAL(released()), this, SLOT(circleDraw()));
 
     connect(ui->actionNew, &QAction::triggered,
             this, &SpriteEditorWindow::newFile);
@@ -32,10 +38,43 @@ SpriteEditorWindow::~SpriteEditorWindow()
     delete ui;
 }
 
-void SpriteEditorWindow::drawLine()
+void SpriteEditorWindow::sliderChangeBrushSize()
 {
-    //ScribbleArea::drawLineTo()
-    std::cout << "draw line\n";
+    int brushSizeValue = ui->brushSizeSlider->value();
+    ui->canvasWidget->setPenWidth(brushSizeValue);
+    ui->spinBox->setValue(brushSizeValue);
+}
+
+void SpriteEditorWindow::spinBoxChangeBrushSize()
+{
+    int brushSizeValue = ui->spinBox->value();
+    ui->canvasWidget->setPenWidth(brushSizeValue);
+    ui->brushSizeSlider->setSliderPosition(brushSizeValue);
+}
+
+void SpriteEditorWindow::pencilDraw()
+{
+    ui->canvasWidget->toolChooserHelper(0);
+}
+
+void SpriteEditorWindow::lineDraw()
+{
+    ui->canvasWidget->toolChooserHelper(1);
+}
+
+void SpriteEditorWindow::eraser()
+{
+    ui->canvasWidget->toolChooserHelper(2);
+}
+
+void SpriteEditorWindow::rectDraw()
+{
+    ui->canvasWidget->toolChooserHelper(3);
+}
+
+void SpriteEditorWindow::circleDraw()
+{
+    ui->canvasWidget->toolChooserHelper(4);
 }
 
 void SpriteEditorWindow::newFile() {
