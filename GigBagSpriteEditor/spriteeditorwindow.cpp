@@ -52,10 +52,14 @@ void SpriteEditorWindow::saveFile() {
     model.saveFrame(currentFrameIndex, currentImage);
     model.saveAsSSP("testSaveFile");
 }
+
 void SpriteEditorWindow::saveAsFile() {
-    std::cout << "save as file\n";
+    std::cout << "save as file\n" ;
+    QImage currentImage = ui->canvasWidget->getImage();
+    model.saveFrame(currentFrameIndex, currentImage);
     model.saveAsGIF("testGIFSaveFile.gif");
 }
+
 void SpriteEditorWindow::addFrame() {
     std::cout << "add frame\n";
     model.addFrame();
