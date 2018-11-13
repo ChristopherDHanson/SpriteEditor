@@ -17,6 +17,7 @@ public:
 //    ScribbleArea(const ScribbleArea& other);
 //    ScribbleArea& operator=(ScribbleArea other);
     QImage image;
+    QImage getImage();
 private:
         bool openImage(const QString &fileName);
         bool saveImage(const QString &fileName, const char *fileFormat);

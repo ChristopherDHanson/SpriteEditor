@@ -6,6 +6,7 @@ SpriteEditorWindow::SpriteEditorWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::SpriteEditorWindow)
 {
+    currentFrameIndex = 0;
     ui->setupUi(this);
     //ScribbleArea* sa = new ScribbleArea;
     connect(ui->lineBrushButton, &QPushButton::pressed, this, &SpriteEditorWindow::drawLine);
@@ -47,6 +48,8 @@ void SpriteEditorWindow::openFile() {
 }
 void SpriteEditorWindow::saveFile() {
     std::cout << "save file\n";
+    QImage currentImage = ui->canvasWidget->getImage();
+    model.saveFrame(currentFrameIndex, currentImage);
     model.saveAsSSP("testSaveFile");
 }
 void SpriteEditorWindow::saveAsFile() {
