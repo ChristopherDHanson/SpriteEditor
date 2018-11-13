@@ -1,5 +1,6 @@
 #include "FramesModel.h"
 #include "gif.h"
+#include <qbuffer.h>
 
 FramesModel::FramesModel()
 {
