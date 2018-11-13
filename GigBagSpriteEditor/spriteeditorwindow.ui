@@ -83,6 +83,15 @@
         <height>20</height>
        </rect>
       </property>
+      <property name="minimum">
+       <number>1</number>
+      </property>
+      <property name="maximum">
+       <number>20</number>
+      </property>
+      <property name="pageStep">
+       <number>2</number>
+      </property>
       <property name="orientation">
        <enum>Qt::Horizontal</enum>
       </property>
@@ -134,6 +143,12 @@
         <width>31</width>
         <height>21</height>
        </rect>
+      </property>
+      <property name="minimum">
+       <number>1</number>
+      </property>
+      <property name="maximum">
+       <number>20</number>
       </property>
      </widget>
      <widget class="QPushButton" name="eraserButton">

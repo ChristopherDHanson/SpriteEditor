@@ -93,17 +93,8 @@ void FramesModel::saveAsGIF(std::string filePath)
     //take each current frame and write it
     for (size_t i = 0; i < frames.length(); i++)
     {
-      QImage original;
-      QImage temp = frames[i];
-      QByteArray imageByteArr;
-      QBuffer buffer(&imageByteArr);
-      buffer.open(QIODevice::WriteOnly);
-      original.save(&buffer, "");
-
-      char* imageData = imageByteArr.data();
-      uint8_t* imageData8t = (uint8_t*)imageData;
-
-      GifWriteFrame(&newGifFile, imageData8t, width, height, 10, 8, false);
+      QImage original = frames[i].convertToFormat(QImage::Format_RGBA8888);
+      GifWriteFrame(&newGifFile, original.bits(), width, height, 10, 8, false);
     }
 
     //complete EOF code
