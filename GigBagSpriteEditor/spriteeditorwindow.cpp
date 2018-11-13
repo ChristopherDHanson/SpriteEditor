@@ -6,9 +6,16 @@ SpriteEditorWindow::SpriteEditorWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::SpriteEditorWindow)
 {
+    currentFrameIndex = 0;
     ui->setupUi(this);
-    //ScribbleArea* sa = new ScribbleArea;
-    connect(ui->lineBrushButton, &QPushButton::pressed, this, &SpriteEditorWindow::drawLine);
+
+    connect(ui->brushSizeSlider, SIGNAL(sliderReleased()), this, SLOT(sliderChangeBrushSize()));
+    connect(ui->spinBox, SIGNAL(valueChanged(int)), this, SLOT(spinBoxChangeBrushSize()));
+    connect(ui->dotBrushButton, SIGNAL(released()), this, SLOT(pencilDraw()));
+    connect(ui->lineBrushButton, SIGNAL(released()), this, SLOT(lineDraw()));
+    connect(ui->eraserButton, SIGNAL(released()), this, SLOT(eraser()));
+    connect(ui->rectangleBrushButton, SIGNAL(released()), this, SLOT(rectDraw()));
+    connect(ui->circleBrushButton, SIGNAL(released()), this, SLOT(circleDraw()));
 
     connect(ui->actionNew, &QAction::triggered,
             this, &SpriteEditorWindow::newFile);
@@ -31,11 +38,49 @@ SpriteEditorWindow::~SpriteEditorWindow()
     delete ui;
 }
 
-void SpriteEditorWindow::drawLine()
+void SpriteEditorWindow::sliderChangeBrushSize()
 {
+    int brushSizeValue = ui->brushSizeSlider->value();
+    ui->canvasWidget->setPenWidth(brushSizeValue);
+    ui->spinBox->setValue(brushSizeValue);
+}
+
+void SpriteEditorWindow::spinBoxChangeBrushSize()
+{
+<<<<<<< HEAD
 
     //ScribbleArea::drawLineTo()
     std::cout << "draw line\n";
+=======
+    int brushSizeValue = ui->spinBox->value();
+    ui->canvasWidget->setPenWidth(brushSizeValue);
+    ui->brushSizeSlider->setSliderPosition(brushSizeValue);
+}
+
+void SpriteEditorWindow::pencilDraw()
+{
+    ui->canvasWidget->toolChooserHelper(0);
+}
+
+void SpriteEditorWindow::lineDraw()
+{
+    ui->canvasWidget->toolChooserHelper(1);
+}
+
+void SpriteEditorWindow::eraser()
+{
+    ui->canvasWidget->toolChooserHelper(2);
+}
+
+void SpriteEditorWindow::rectDraw()
+{
+    ui->canvasWidget->toolChooserHelper(3);
+}
+
+void SpriteEditorWindow::circleDraw()
+{
+    ui->canvasWidget->toolChooserHelper(4);
+>>>>>>> ec712d8ac9ce8512048ff56b2435a802c2f80483
 }
 
 void SpriteEditorWindow::newFile() {
@@ -48,15 +93,21 @@ void SpriteEditorWindow::openFile() {
 }
 void SpriteEditorWindow::saveFile() {
     std::cout << "save file\n";
+    QImage currentImage = ui->canvasWidget->getImage();
+    model.saveFrame(currentFrameIndex, currentImage);
     model.saveAsSSP("testSaveFile");
 }
+
 void SpriteEditorWindow::saveAsFile() {
-    std::cout << "save as file\n";
+    std::cout << "save as file\n" ;
+    QImage currentImage = ui->canvasWidget->getImage();
+    model.saveFrame(currentFrameIndex, currentImage);
     model.saveAsGIF("testGIFSaveFile.gif");
 }
+
 void SpriteEditorWindow::addFrame() {
     std::cout << "add frame\n";
-    model.addFrame();
+    model.addDuplicateFrame();
 }
 void SpriteEditorWindow::deleteFrame() {
    std::cout << "delete frame\n";

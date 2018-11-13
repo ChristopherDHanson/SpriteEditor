@@ -12,18 +12,26 @@ class ScribbleArea : public QWidget
 //    Q_OBJECT
 
 public:
+<<<<<<< HEAD
     ScribbleArea(QWidget *parent = 0);
     ~ScribbleArea();
 //    ScribbleArea(const ScribbleArea& other);
 //    ScribbleArea& operator=(ScribbleArea other);
     QImage image;
     //void setPenColor(const QColor &newColor);
+=======
+        ScribbleArea(QWidget *parent = 0);
+//    ~ScribbleArea();
+//    ScribbleArea(const ScribbleArea& other);
+//    ScribbleArea& operator=(ScribbleArea other);
+        void setPenColor(const QColor &newColor);
+        void setPenWidth(int newWidth);
+        void toolChooserHelper(int tool);
+    QImage getImage();
+>>>>>>> ec712d8ac9ce8512048ff56b2435a802c2f80483
 private:
         bool openImage(const QString &fileName);
         bool saveImage(const QString &fileName, const char *fileFormat);
-        void setPenColor(const QColor &newColor);
-        void setPenWidth(int newWidth);
-
         bool isModified() const { return modified; }
         QColor penColor() const { return myPenColor; }
         int penWidth() const { return myPenWidth; }
@@ -40,14 +48,20 @@ private:
         void resizeEvent(QResizeEvent *event) override;
 
     private:
-        void drawLineTo(const QPoint &endPoint);
+        void drawingTools(const QPoint &endPoint);
+        void pencilTool(const QPoint &endPoint);
+        void lineTool(const QPoint &endPoint);
+        void rectangleTool(const QPoint &endPoint);
+        void ellipseTool(const QPoint &endPoint);
+        void eraserTool(const QPoint &endPoint);
         void resizeImage(QImage *image, const QSize &newSize);
 
         bool modified;
         bool scribbling;
         int myPenWidth;
+        int drawTool;
         QColor myPenColor;
-//        QImage image;
+        QImage image;
         QPoint lastPoint;
 };
 

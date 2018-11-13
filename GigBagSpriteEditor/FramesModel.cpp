@@ -24,19 +24,28 @@ QVector<QImage> FramesModel::getFrames() {
     return frames;
 }
 
-void FramesModel::addFrame() {
+void FramesModel::addDuplicateFrame() {
     QImage temp;
     if (frames.length() > 0) {
         temp = frames[frames.length() - 1];
     }
     frames.push_back(temp);
 }
+void FramesModel::addNewFrame() {
+    QImage temp;
+    if (frames.length() > 0) {
+        temp = QImage(frames[frames.length() - 1].size(), QImage::Format_RGB32);
+    }
+    frames.push_back(temp);
+}
 void FramesModel::deleteFrame(int index) {
-    frames.remove(index);
+    if (index >= 0 && index < frames.length() - 1) {
+        frames.remove(index);
+    }
 }
 void FramesModel::saveFrame(int frameIndex, QImage frame) {
     if (frameIndex < frames.size())
-        frames[frameIndex] = frame;
+        frames[frameIndex] = QImage(frame);
 }
 void FramesModel::swapFrameOrder(int firstIndex, int secondIndex) {
     if (firstIndex < frames.length() && secondIndex < frames.length()) {
@@ -57,8 +66,8 @@ void FramesModel::saveAsSSP(std::string fileName) {
       outfile << frames.length() << "\n";
       // Output data
       for (QImage frame : frames) {
-          for ( int row = 1; row < frame.height() + 1; ++row ) {
-              for ( int col = 1; col < frame.width() + 1; ++col )
+          for ( int row = 1; row < frame.height() - 1; ++row ) {
+              for ( int col = 1; col < frame.width() - 1; ++col )
               {
                   QColor clrCurrent( frame.pixel( row, col ) );
 
@@ -66,9 +75,9 @@ void FramesModel::saveAsSSP(std::string fileName) {
                             << clrCurrent.red() << " "
                             << clrCurrent.green() << " "
                             << clrCurrent.blue() << " "
-                            << clrCurrent.alpha() << " "
-                            << std::endl;
+                            << clrCurrent.alpha() << " ";
               }
+              outfile << std::endl;
           }
       }
       outfile.close();
@@ -84,17 +93,8 @@ void FramesModel::saveAsGIF(std::string filePath)
     //take each current frame and write it
     for (size_t i = 0; i < frames.length(); i++)
     {
-      QImage original;
-      QImage temp = frames[i];
-      QByteArray imageByteArr;
-      QBuffer buffer(&imageByteArr);
-      buffer.open(QIODevice::WriteOnly);
-      original.save(&buffer, "");
-
-      char* imageData = imageByteArr.data();
-      uint8_t* imageData8t = (uint8_t*)imageData;
-
-      GifWriteFrame(&newGifFile, imageData8t, width, height, 10, 8, false);
+      QImage original = frames[i].convertToFormat(QImage::Format_RGBA8888);
+      GifWriteFrame(&newGifFile, original.bits(), width, height, 10, 8, false);
     }
 
     //complete EOF code

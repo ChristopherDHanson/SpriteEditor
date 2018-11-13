@@ -23,7 +23,13 @@ private:
     int currentFrameIndex;
 
 private slots:
-    void drawLine();
+    void sliderChangeBrushSize();
+    void spinBoxChangeBrushSize();
+    void pencilDraw();
+    void lineDraw();
+    void eraser();
+    void rectDraw();
+    void circleDraw();
     void newFile();
     void openFile();
     void saveFile();
