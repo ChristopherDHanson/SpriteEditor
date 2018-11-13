@@ -50,6 +50,13 @@ bool ScribbleArea::saveImage(const QString &fileName, const char *fileFormat)
         return false;
 }
 
+QImage ScribbleArea::getImage()
+{
+    QImage visibleImage = image;
+    resizeImage(&visibleImage, size());
+    return visibleImage;
+}
+
 void ScribbleArea::setPenColor(const QColor &newColor)
 {
     myPenColor = newColor;

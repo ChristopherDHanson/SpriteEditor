@@ -36,7 +36,7 @@ void FramesModel::deleteFrame(int index) {
 }
 void FramesModel::saveFrame(int frameIndex, QImage frame) {
     if (frameIndex < frames.size())
-        frames[frameIndex] = frame;
+        frames[frameIndex] = QImage(frame);
 }
 void FramesModel::swapFrameOrder(int firstIndex, int secondIndex) {
     if (firstIndex < frames.length() && secondIndex < frames.length()) {
@@ -57,8 +57,8 @@ void FramesModel::saveAsSSP(std::string fileName) {
       outfile << frames.length() << "\n";
       // Output data
       for (QImage frame : frames) {
-          for ( int row = 1; row < frame.height() + 1; ++row ) {
-              for ( int col = 1; col < frame.width() + 1; ++col )
+          for ( int row = 1; row < frame.height() - 1; ++row ) {
+              for ( int col = 1; col < frame.width() - 1; ++col )
               {
                   QColor clrCurrent( frame.pixel( row, col ) );
 
@@ -66,9 +66,9 @@ void FramesModel::saveAsSSP(std::string fileName) {
                             << clrCurrent.red() << " "
                             << clrCurrent.green() << " "
                             << clrCurrent.blue() << " "
-                            << clrCurrent.alpha() << " "
-                            << std::endl;
+                            << clrCurrent.alpha() << " ";
               }
+              outfile << std::endl;
           }
       }
       outfile.close();
