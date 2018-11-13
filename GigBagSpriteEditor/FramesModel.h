@@ -16,10 +16,12 @@ public:
   QVector<QImage> getFrames();
 
   // Should be called whenever user adds new frame to their sprite
-  void addFrame(QImage newFrame);
+  void addFrame();
+  void deleteFrame(int index);
   // Each time the user changes frames or saves (slot from save signal calls this, then saveAsxxx method)
   void saveFrame(int frameIndex, QImage frame);
   void swapFrameOrder(int firstIndex, int secondIndex);
+  void newProject();
 
   void saveAsSSP(std::string filename);
   void saveAsGIF(std::string filename);

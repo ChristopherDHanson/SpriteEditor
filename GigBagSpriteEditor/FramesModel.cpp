@@ -3,7 +3,8 @@
 
 FramesModel::FramesModel()
 {
-
+    height = 0;
+    width = 0;
 }
 FramesModel::~FramesModel()
 {
@@ -22,8 +23,15 @@ QVector<QImage> FramesModel::getFrames() {
     return frames;
 }
 
-void FramesModel::addFrame(QImage newFrame) {
-    frames.push_back(newFrame);
+void FramesModel::addFrame() {
+    QImage temp;
+    if (frames.length() > 0) {
+        temp = frames[frames.length() - 1];
+    }
+    frames.push_back(temp);
+}
+void FramesModel::deleteFrame(int index) {
+    frames.remove(index);
 }
 void FramesModel::saveFrame(int frameIndex, QImage frame) {
     if (frameIndex < frames.size())
@@ -35,6 +43,9 @@ void FramesModel::swapFrameOrder(int firstIndex, int secondIndex) {
         frames[firstIndex] = frames[secondIndex];
         frames[secondIndex] = temp;
     }
+}
+void FramesModel::newProject() {
+    frames.clear();
 }
 
 

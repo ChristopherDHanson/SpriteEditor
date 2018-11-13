@@ -155,11 +155,37 @@
     <property name="geometry">
      <rect>
       <x>670</x>
-      <y>59</y>
+      <y>19</y>
       <width>120</width>
-      <height>251</height>
+      <height>291</height>
      </rect>
     </property>
+    <widget class="QPushButton" name="addFrameButton">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>30</y>
+       <width>101</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Add Frame</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="deleteFrameButton">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>80</y>
+       <width>101</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Delete Frame</string>
+     </property>
+    </widget>
    </widget>
    <widget class="QWidget" name="colorPickerWidget" native="true">
     <property name="geometry">

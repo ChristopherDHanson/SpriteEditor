@@ -2,6 +2,8 @@
 #define SPRITEEDITORWINDOW_H
 
 #include <QMainWindow>
+#include <iostream>
+#include "FramesModel.h"
 
 namespace Ui {
 class SpriteEditorWindow;
@@ -17,9 +19,17 @@ public:
 
 private:
     Ui::SpriteEditorWindow *ui;
+    FramesModel model;
+    int currentFrameIndex;
 
 private slots:
     void drawLine();
+    void newFile();
+    void openFile();
+    void saveFile();
+    void saveAsFile();
+    void addFrame();
+    void deleteFrame();
 };
 
 #endif // SPRITEEDITORWINDOW_H
