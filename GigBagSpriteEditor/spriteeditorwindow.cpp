@@ -33,6 +33,7 @@ SpriteEditorWindow::~SpriteEditorWindow()
 
 void SpriteEditorWindow::drawLine()
 {
+
     //ScribbleArea::drawLineTo()
     std::cout << "draw line\n";
 }

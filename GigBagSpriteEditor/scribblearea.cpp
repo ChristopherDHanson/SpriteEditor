@@ -17,11 +17,14 @@ ScribbleArea::ScribbleArea(QWidget *parent) : QWidget(parent)
     setAttribute(Qt::WA_StaticContents);
     modified = false;
     scribbling = false;
-    myPenWidth = 10;
+    myPenWidth = 1;
     myPenColor = Qt::black;
 }
 
-//ScribbleArea::~ScribbleArea(){}
+ScribbleArea::~ScribbleArea()
+{
+
+}
 
 bool ScribbleArea::openImage(const QString &fileName)
 {
