@@ -1,6 +1,7 @@
 #include "spriteeditorwindow.h"
 #include "ui_spriteeditorwindow.h"
 #include "scribblearea.h"
+#include "framesarea.h"
 
 SpriteEditorWindow::SpriteEditorWindow(QWidget *parent) :
     QMainWindow(parent),

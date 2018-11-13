@@ -29,12 +29,14 @@ SOURCES += \
         spriteeditorwindow.cpp \
         FramesModel.cpp \
         scribblearea.cpp \
+    framesarea.cpp
 
 HEADERS += \
         spriteeditorwindow.h \
         scribblearea.h \
         FramesModel.h \
         gif.h \
+    framesarea.h
 
 FORMS += \
         spriteeditorwindow.ui \

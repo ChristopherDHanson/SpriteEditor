@@ -1,3 +1,6 @@
+#ifndef FRAMESMODEL_H
+#define FRAMESMODEL_H
+
 #include <QMainWindow>
 #include <QBuffer>
 #include <fstream>
@@ -25,5 +28,7 @@ public:
 
   void saveAsSSP(std::string filename);
   void saveAsGIF(std::string filename);
-  QVector<QImage> openSSP(std::string filepath);
+  void openSSP(std::string filepath);
 };
+
+#endif // FRAMESMODEL_H

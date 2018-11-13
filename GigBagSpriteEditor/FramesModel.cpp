@@ -105,7 +105,7 @@ void FramesModel::saveAsGIF(std::string filePath)
     outfile.close();
 }
 
-QVector<QImage> FramesModel::openSSP(std::string filepath) {
+void FramesModel::openSSP(std::string filepath) {
     std::string currentLine;
     std::ifstream fileToOpen (filepath);
 

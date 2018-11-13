@@ -157,14 +157,14 @@
       <x>670</x>
       <y>19</y>
       <width>120</width>
-      <height>291</height>
+      <height>511</height>
      </rect>
     </property>
     <widget class="QPushButton" name="addFrameButton">
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>30</y>
+       <y>10</y>
        <width>101</width>
        <height>41</height>
       </rect>
@@ -177,13 +177,49 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>80</y>
+       <y>60</y>
        <width>101</width>
        <height>41</height>
       </rect>
      </property>
      <property name="text">
       <string>Delete Frame</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="previousFrameButton">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>110</y>
+       <width>101</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>▲</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="nextFrameButton">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>460</y>
+       <width>101</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>▼</string>
+     </property>
+    </widget>
+    <widget class="framesarea" name="framesSelectorWidget" native="true">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>160</y>
+       <width>100</width>
+       <height>290</height>
+      </rect>
      </property>
     </widget>
    </widget>
@@ -217,7 +253,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>22</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -277,6 +313,12 @@
    <class>ScribbleArea</class>
    <extends>QWidget</extends>
    <header>scribblearea.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>framesarea</class>
+   <extends>QWidget</extends>
+   <header>framesarea.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
