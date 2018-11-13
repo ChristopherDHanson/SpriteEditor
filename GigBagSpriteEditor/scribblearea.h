@@ -13,10 +13,11 @@ class ScribbleArea : public QWidget
 
 public:
     ScribbleArea(QWidget *parent = 0);
-//    ~ScribbleArea();
+    ~ScribbleArea();
 //    ScribbleArea(const ScribbleArea& other);
 //    ScribbleArea& operator=(ScribbleArea other);
     QImage image;
+    //void setPenColor(const QColor &newColor);
 private:
         bool openImage(const QString &fileName);
         bool saveImage(const QString &fileName, const char *fileFormat);
