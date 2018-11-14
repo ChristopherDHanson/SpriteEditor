@@ -96,6 +96,10 @@ void SpriteEditorWindow::clearCanvas()
 
 void SpriteEditorWindow::newFile() {
     std::cout << "new file\n";
+    sizeSelectionWindow* s = new sizeSelectionWindow(this, this);
+    s->show();
+    s->raise();
+    s->activateWindow();
     model->newProject();
 }
 void SpriteEditorWindow::openFile() {
