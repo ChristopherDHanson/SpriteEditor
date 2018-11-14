@@ -30,6 +30,7 @@ private slots:
     void eraser();
     void rectDraw();
     void circleDraw();
+    void clearCanvas();
     void newFile();
     void openFile();
     void saveFile();

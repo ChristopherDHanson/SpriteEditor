@@ -10,12 +10,14 @@ SpriteEditorWindow::SpriteEditorWindow(QWidget *parent) :
     ui->setupUi(this);
 
     connect(ui->brushSizeSlider, SIGNAL(sliderReleased()), this, SLOT(sliderChangeBrushSize()));
+    connect(ui->brushSizeSlider, SIGNAL(valueChanged()), this, SLOT(sliderChangeBrushSize()));
     connect(ui->spinBox, SIGNAL(valueChanged(int)), this, SLOT(spinBoxChangeBrushSize()));
     connect(ui->dotBrushButton, SIGNAL(released()), this, SLOT(pencilDraw()));
     connect(ui->lineBrushButton, SIGNAL(released()), this, SLOT(lineDraw()));
     connect(ui->eraserButton, SIGNAL(released()), this, SLOT(eraser()));
     connect(ui->rectangleBrushButton, SIGNAL(released()), this, SLOT(rectDraw()));
     connect(ui->circleBrushButton, SIGNAL(released()), this, SLOT(circleDraw()));
+    connect(ui->clearFrameButton, SIGNAL(released()), this, SLOT(clearCanvas()));
 
     // connect(ui->lineBrushButton, &QPushButton::pressed, this, &SpriteEditorWindow::drawLine);
 
@@ -77,6 +79,11 @@ void SpriteEditorWindow::rectDraw()
 void SpriteEditorWindow::circleDraw()
 {
     ui->canvasWidget->toolChooserHelper(4);
+}
+
+void SpriteEditorWindow::clearCanvas()
+{
+    ui->canvasWidget->clearImage();
 }
 
 void SpriteEditorWindow::newFile() {

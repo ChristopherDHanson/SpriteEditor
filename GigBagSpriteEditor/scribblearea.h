@@ -16,14 +16,13 @@ public:
 //    ~ScribbleArea();
 //    ScribbleArea(const ScribbleArea& other);
 //    ScribbleArea& operator=(ScribbleArea other);
-    QImage image;
+        void setPenColor(const QColor &newColor);
+        void setPenWidth(int newWidth);
+        void toolChooserHelper(int tool);
     QImage getImage();
 private:
         bool openImage(const QString &fileName);
         bool saveImage(const QString &fileName, const char *fileFormat);
-        void setPenColor(const QColor &newColor);
-        void setPenWidth(int newWidth);
-        void toolChooserHelper(int tool);
         bool isModified() const { return modified; }
         QColor penColor() const { return myPenColor; }
         int penWidth() const { return myPenWidth; }
