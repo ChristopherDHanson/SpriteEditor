@@ -19,6 +19,7 @@ public:
         void setPenColor(const QColor &newColor);
         void setPenWidth(int newWidth);
         void toolChooserHelper(int tool);
+        void setImageSize(int size);
     QImage getImage();
 private:
         bool openImage(const QString &fileName);
@@ -26,6 +27,7 @@ private:
         bool isModified() const { return modified; }
         QColor penColor() const { return myPenColor; }
         int penWidth() const { return myPenWidth; }
+        double imageSize;
 
     public slots:
         void clearImage();
@@ -36,7 +38,6 @@ private:
         void mouseMoveEvent(QMouseEvent *event) override;
         void mouseReleaseEvent(QMouseEvent *event) override;
         void paintEvent(QPaintEvent *event) override;
-        void resizeEvent(QResizeEvent *event) override;
 
     private:
         void drawingTools(const QPoint &endPoint);
