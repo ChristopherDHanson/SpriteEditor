@@ -5,7 +5,7 @@
 #include <QHBoxLayout>
 #include <QPushButton>
 #include <QWidget>
-#include "FramesModel.h"
+#include <QVector>
 
 framesarea::framesarea(QWidget *parent) : QWidget(parent)
 {
@@ -15,7 +15,7 @@ framesarea::framesarea(QWidget *parent) : QWidget(parent)
     this->setStyleSheet("background-color: blue");
     // set scroll area
     QScrollArea *scrollArea = new QScrollArea(this);
-    scrollArea->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn );
+    scrollArea->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
     scrollArea->setWidgetResizable(true);
     scrollArea->setFixedSize(100, 290);
     scrollArea->setContentsMargins(0,0,0,0);
@@ -31,38 +31,66 @@ framesarea::framesarea(QWidget *parent) : QWidget(parent)
     widget->setLayout(vlayout);
 
     // For testing only
+
+    clearFrames();
     for (int i = 0; i < 5; i++){
         QPushButton *button = new QPushButton(QString::number(i));
+        button->setFlat(true);
+        button->setAutoFillBackground(true);
         button->setContentsMargins(0,0,0,0);
         button->setStyleSheet("background-color: red");
         button->setFixedSize(70, 70);
+        buttonFrames->append(button);
         vlayout->addWidget(button);
     }
+    setSelectedFrameIndex(0);
     // Above For Testing Only
     this->show();
 }
 
-
-
-void framesarea::setModel(FramesModel *_model){
-    model = _model;
+void framesarea::clearFrames(){
+    for (int i = 0; i < buttonFrames->size(); i++){
+        delete buttonFrames->at(i);
+    }
+    buttonFrames->clear();
 }
 
-void framesarea::updateFramesArea(){
-this->setStyleSheet("background-color: blue");
+
+void framesarea::updateFramesArea(QVector<QImage> *frames){
+    clearFrames();
+    for(int i = 0; i < frames->size(); i++) {
+        QImage img = frames->at(i);
+        QPushButton *button = new QPushButton(QString::number(i+1));
+        button->setFlat(true);
+        button->setAutoFillBackground(true);
+        button->setContentsMargins(0,0,0,0);
+        button->setStyleSheet("background-color: red");
+        button->setFixedSize(70, 70);
+        button->setIcon(QIcon(QPixmap::fromImage(img)));
+        button->setIconSize(img.size());
+        buttonFrames->append(button);
+        vlayout->addWidget(button);
+    }
+    if (buttonFrames->size() > 0){
+        setSelectedFrameIndex(0);
+    }
 
 }
 
 void framesarea::setSelectedFrameIndex(int frameIndex){
+    //unselect all of them
+    for (int i = 0; i < buttonFrames->size(); i++){
+        buttonFrames->at(i)->setStyleSheet("QPushButton {background-color: red; color: black;}");
+    }
+    //select specific one
+    if (frameIndex >= 0 && frameIndex < buttonFrames->size()){
+        frameIndex = frameIndex % buttonFrames->size();
+    }
 
+    buttonFrames->at(frameIndex)->setStyleSheet("QPushButton {background-color: red; color: yellow;}");
 }
 
-void framesarea::selectPreviousFrame(){
 
-}
 
-void framesarea::selectNextFrame(){
-
-}
 
 
