@@ -41,7 +41,6 @@ private slots:
     void deleteFrame();
     void showPreview();
     void on_colorPaletteButton_clicked();
-    void on_actionOpen_triggered();
     void incrementCurrentFrameIndex();
     void decrementCurrentFrameIndex();
 };
