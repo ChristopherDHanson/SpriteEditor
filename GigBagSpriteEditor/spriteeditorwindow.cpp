@@ -14,7 +14,6 @@ SpriteEditorWindow::SpriteEditorWindow(QWidget *parent) :
 {
     currentFrameIndex = 0;
     ui->setupUi(this);
-
     connect(ui->brushSizeSlider, SIGNAL(valueChanged(int)), this, SLOT(sliderChangeBrushSize(int)));
     connect(ui->spinBox, SIGNAL(valueChanged(int)), this, SLOT(spinBoxChangeBrushSize()));
     connect(ui->dotBrushButton, SIGNAL(released()), this, SLOT(pencilDraw()));
@@ -47,7 +46,10 @@ SpriteEditorWindow::SpriteEditorWindow(QWidget *parent) :
             this, &SpriteEditorWindow::previousFrame);
 
 
-
+    //set default color
+    ui->colorPaletteButton->setFlat(false);
+    ui->colorPaletteButton->setStyleSheet("QPushButton {background-color: black; border: 0px;}");
+    ui->canvasWidget->setPenColor(Qt::black);
     sizeSelectionWindow* s = new sizeSelectionWindow(this, this);
     s->show();
     s->raise();
@@ -192,6 +194,9 @@ void SpriteEditorWindow::showPreview()
 
 void SpriteEditorWindow::on_colorPaletteButton_clicked()
 {
+    ui->colorPaletteButton->setFlat(true);
+    ui->colorPaletteButton->setAutoFillBackground(true);
+    ui->colorPaletteButton->setStyleSheet("background-color: rgba(255, 555, 255, 0);");
     QColor color = QColorDialog::getColor(Qt::white, this, "Select Color");
     if (color.isValid())
     {
