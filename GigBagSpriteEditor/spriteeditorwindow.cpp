@@ -56,11 +56,7 @@ void SpriteEditorWindow::sliderChangeBrushSize()
 
 void SpriteEditorWindow::spinBoxChangeBrushSize()
 {
-<<<<<<< HEAD
 
-    //ScribbleArea::drawLineTo()
-    std::cout << "draw line\n";
-=======
     int brushSizeValue = ui->spinBox->value();
     ui->canvasWidget->setPenWidth(brushSizeValue);
     ui->brushSizeSlider->setSliderPosition(brushSizeValue);
@@ -89,7 +85,6 @@ void SpriteEditorWindow::rectDraw()
 void SpriteEditorWindow::circleDraw()
 {
     ui->canvasWidget->toolChooserHelper(4);
->>>>>>> ec712d8ac9ce8512048ff56b2435a802c2f80483
 }
 
 void SpriteEditorWindow::clearCanvas()

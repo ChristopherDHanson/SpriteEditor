@@ -22,14 +22,6 @@ ScribbleArea::ScribbleArea(QWidget *parent) : QWidget(parent)
     drawTool = 0;
 }
 
-<<<<<<< HEAD
-ScribbleArea::~ScribbleArea()
-{
-
-}
-
-=======
->>>>>>> ec712d8ac9ce8512048ff56b2435a802c2f80483
 bool ScribbleArea::openImage(const QString &fileName)
 {
     QImage loadedImage;
