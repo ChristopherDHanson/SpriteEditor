@@ -1,11 +1,8 @@
 #include "FramesModel.h"
 #include "gif.h"
-<<<<<<< HEAD
 #include <qbuffer.h>
-=======
 #include "previewwindow.h"
 #include "iostream"
->>>>>>> frameSelector
 
 FramesModel::FramesModel()
 {
@@ -36,7 +33,6 @@ void FramesModel::addDuplicateFrame() {
     }
     frames.push_back(temp);
 }
-<<<<<<< HEAD
 void FramesModel::addNewFrame() {
     QImage temp;
     if (frames.length() > 0) {
@@ -44,9 +40,6 @@ void FramesModel::addNewFrame() {
     }
     frames.push_back(temp);
 }
-=======
-
->>>>>>> frameSelector
 void FramesModel::deleteFrame(int index) {
     if (index >= 0 && index < frames.length() - 1) {
         frames.remove(index);
