@@ -62,6 +62,7 @@ void SpriteEditorWindow::incrementCurrentFrameIndex() {
     if (currentFrameIndex < model->getFrames().size()) {
         currentFrameIndex++;
     }
+    ui->canvasWidget->setImage(model->getFrames()[currentFrameIndex - 1]);
     ui->currentFrameIndexDisplay->setText(QString::number(currentFrameIndex));
 }
 void SpriteEditorWindow::decrementCurrentFrameIndex() {
@@ -70,6 +71,7 @@ void SpriteEditorWindow::decrementCurrentFrameIndex() {
     if (currentFrameIndex > 1) {
         currentFrameIndex--;
     }
+    ui->canvasWidget->setImage(model->getFrames()[currentFrameIndex - 1]);
     ui->currentFrameIndexDisplay->setText(QString::number(currentFrameIndex));
 }
 
