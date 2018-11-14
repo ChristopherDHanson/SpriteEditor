@@ -6,8 +6,7 @@
 
 FramesModel::FramesModel()
 {
-    height = 0;
-    width = 0;
+
 }
 FramesModel::FramesModel(int dimensions)
 {
