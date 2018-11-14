@@ -30,7 +30,8 @@ SOURCES += \
         FramesModel.cpp \
         scribblearea.cpp \
     framesarea.cpp \
-    previewwindow.cpp
+    previewwindow.cpp \
+    sizeselectionwindow.cpp
 
 HEADERS += \
         spriteeditorwindow.h \
@@ -38,11 +39,13 @@ HEADERS += \
         FramesModel.h \
         gif.h \
     framesarea.h \
-    previewwindow.h
+    previewwindow.h \
+    sizeselectionwindow.h
 
 FORMS += \
         spriteeditorwindow.ui \
-    previewwindow.ui
+    previewwindow.ui \
+    sizeselectionwindow.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

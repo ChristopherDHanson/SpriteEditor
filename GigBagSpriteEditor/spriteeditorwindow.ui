@@ -2,6 +2,9 @@
 <ui version="4.0">
  <class>SpriteEditorWindow</class>
  <widget class="QMainWindow" name="SpriteEditorWindow">
+  <property name="enabled">
+   <bool>false</bool>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -15,7 +18,7 @@
   </property>
   <widget class="QWidget" name="centralWidget">
    <property name="enabled">
-    <bool>true</bool>
+    <bool>false</bool>
    </property>
    <property name="autoFillBackground">
     <bool>false</bool>
@@ -440,7 +443,7 @@ color: rgb(0, 0, 0);</string>
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>20</height>
+     <height>22</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -480,7 +483,7 @@ color: rgb(255, 255, 255);</string>
   </widget>
   <widget class="QStatusBar" name="statusBar">
    <property name="enabled">
-    <bool>true</bool>
+    <bool>false</bool>
    </property>
   </widget>
   <action name="actionNew">

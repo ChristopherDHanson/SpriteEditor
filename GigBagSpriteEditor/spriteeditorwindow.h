@@ -16,11 +16,13 @@ class SpriteEditorWindow : public QMainWindow
 public:
     explicit SpriteEditorWindow(QWidget *parent = nullptr);
     ~SpriteEditorWindow();
+    void setDimensions(int dim);
 
 private:
     Ui::SpriteEditorWindow *ui;
-    FramesModel model;
+    FramesModel* model;
     int currentFrameIndex;
+    int dimensions;
 
 private slots:
     void sliderChangeBrushSize();
