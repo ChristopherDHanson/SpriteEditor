@@ -312,4 +312,5 @@ void ScribbleArea::setImageSize(int size)
     imageSize = (double)size;
     image = QImage(size, size,  QImage::Format_RGB32);
     image.fill(Qt::white);
+    update();
 }
