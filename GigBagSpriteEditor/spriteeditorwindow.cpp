@@ -5,6 +5,7 @@
 #include "framesarea.h"
 #include "QColorDialog"
 #include "previewwindow.h"
+#include "QFileDialog"
 
 SpriteEditorWindow::SpriteEditorWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -96,7 +97,6 @@ void SpriteEditorWindow::clearCanvas()
 }
 
 void SpriteEditorWindow::newFile() {
-    std::cout << "new file\n";
     sizeSelectionWindow* s = new sizeSelectionWindow(this, this);
     s->show();
     s->raise();
@@ -108,32 +108,33 @@ void SpriteEditorWindow::openFile() {
 
     QString fileName = QFileDialog::getOpenFileName(this,
        tr("Open SSP File"), "",
-       tr("Address Book (*.abk);;All Files (*)"));
+       tr("SSP (*.ssp)"));
 
-    model->openSSP(fileName);
+    model->openSSP(fileName.toUtf8().constData());
 }
 void SpriteEditorWindow::saveFile() {
-    std::cout << "save file\n";
     QImage currentImage = ui->canvasWidget->getImage();
     model->saveFrame(currentFrameIndex, currentImage);
-    model->saveAsSSP("testSaveFile");
+
+    QString fileName = QFileDialog::getSaveFileName(this,
+        tr("Save SSP File"), "",
+        tr("SSP (*.ssp)"));
+
+    model->saveAsSSP(fileName.toUtf8().constData());
 }
 
 void SpriteEditorWindow::saveAsFile() {
-    std::cout << "save as file\n" ;
     QImage currentImage = ui->canvasWidget->getImage();
     model->saveFrame(currentFrameIndex, currentImage);
     model->saveAsGIF("testGIFSaveFile.gif");
 }
 
 void SpriteEditorWindow::addFrame() {
-    std::cout << "add frame\n";
     QImage currentImage = ui->canvasWidget->getImage();
     model->saveFrame(currentFrameIndex, currentImage);
     model->addDuplicateFrame();
 }
 void SpriteEditorWindow::deleteFrame() {
-   std::cout << "delete frame\n";
    model->deleteFrame(currentFrameIndex);
 }
 
