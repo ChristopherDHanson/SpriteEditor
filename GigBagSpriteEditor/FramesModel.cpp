@@ -88,22 +88,17 @@ void FramesModel::saveAsGIF(std::string filePath)
     GifWriter newGifFile;
 
     //initialize writer
-    GifBegin(&newGifFile, filePath.c_str(), width, height, 10);
+    GifBegin(&newGifFile, filePath.c_str(), frames[0].width(), frames[0].height(), 10);
 
     //take each current frame and write it
     for (size_t i = 0; i < frames.length(); i++)
     {
       QImage original = frames[i].convertToFormat(QImage::Format_RGBA8888);
-      GifWriteFrame(&newGifFile, original.bits(), width, height, 10, 8, false);
+      GifWriteFrame(&newGifFile, original.bits(), frames[i].width(), frames[i].height(), 10, 8, false);
     }
 
     //complete EOF code
     GifEnd(&newGifFile);
-
-    //safe file to stream
-    std::ofstream outfile (filePath + ".gif");
-    outfile << newGifFile.f;
-    outfile.close();
 }
 
 QVector<QImage> FramesModel::openSSP(std::string filepath) {
