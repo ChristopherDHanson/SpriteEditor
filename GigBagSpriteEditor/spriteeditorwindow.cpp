@@ -1,6 +1,8 @@
 #include "spriteeditorwindow.h"
 #include "ui_spriteeditorwindow.h"
 #include "scribblearea.h"
+#include "framesarea.h"
+#include "QColorDialog"
 
 SpriteEditorWindow::SpriteEditorWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -33,6 +35,10 @@ SpriteEditorWindow::SpriteEditorWindow(QWidget *parent) :
             this, &SpriteEditorWindow::addFrame);
     connect(ui->deleteFrameButton, &QPushButton::pressed,
             this, &SpriteEditorWindow::deleteFrame);
+    connect(ui->showPreviewButton, &QPushButton::pressed,
+            this, &SpriteEditorWindow::showPreview);
+    connect(ui->colorPaletteButton, &QPushButton::pressed,
+            this, &SpriteEditorWindow::showColorPalette);
 
 }
 
@@ -114,4 +120,23 @@ void SpriteEditorWindow::addFrame() {
 void SpriteEditorWindow::deleteFrame() {
    std::cout << "delete frame\n";
    model.deleteFrame(currentFrameIndex);
+}
+
+void SpriteEditorWindow::showPreview()
+{
+    std::cout << "show preview\n";
+    model.showPreview();
+}
+
+void SpriteEditorWindow::showColorPalette()
+{
+    QColor color = QColorDialog::getColor(Qt::white, this, "Select Color");
+    if (color.isValid()){
+        QPalette palette = ui->colorPaletteButton->palette();
+        palette.setColor(ui->colorPaletteButton->backgroundRole(), color);
+        palette.setColor(ui->colorPaletteButton->foregroundRole(), color);
+        ui->colorPaletteButton->setAutoFillBackground(true);
+        ui->colorPaletteButton->setPalette(palette);
+        //TODO: Method to send in the QColor value.
+    }
 }

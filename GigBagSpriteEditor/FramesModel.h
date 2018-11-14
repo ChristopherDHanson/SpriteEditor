@@ -1,3 +1,6 @@
+#ifndef FRAMESMODEL_H
+#define FRAMESMODEL_H
+
 #include <QMainWindow>
 #include <QBuffer>
 #include <fstream>
@@ -19,6 +22,7 @@ public:
   void addDuplicateFrame();
   void addNewFrame();
   void deleteFrame(int index);
+  void showPreview();
   // Each time the user changes frames or saves (slot from save signal calls this, then saveAsxxx method)
   void saveFrame(int frameIndex, QImage frame);
   void swapFrameOrder(int firstIndex, int secondIndex);
@@ -26,5 +30,7 @@ public:
 
   void saveAsSSP(std::string filename);
   void saveAsGIF(std::string filename);
-  QVector<QImage> openSSP(std::string filepath);
+  void openSSP(std::string filepath);
 };
+
+#endif // FRAMESMODEL_H

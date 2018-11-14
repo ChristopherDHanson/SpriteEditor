@@ -1,6 +1,11 @@
 #include "FramesModel.h"
 #include "gif.h"
+<<<<<<< HEAD
 #include <qbuffer.h>
+=======
+#include "previewwindow.h"
+#include "iostream"
+>>>>>>> frameSelector
 
 FramesModel::FramesModel()
 {
@@ -31,6 +36,7 @@ void FramesModel::addDuplicateFrame() {
     }
     frames.push_back(temp);
 }
+<<<<<<< HEAD
 void FramesModel::addNewFrame() {
     QImage temp;
     if (frames.length() > 0) {
@@ -38,10 +44,20 @@ void FramesModel::addNewFrame() {
     }
     frames.push_back(temp);
 }
+=======
+
+>>>>>>> frameSelector
 void FramesModel::deleteFrame(int index) {
     if (index >= 0 && index < frames.length() - 1) {
         frames.remove(index);
     }
+}
+
+void FramesModel::showPreview()
+{
+    PreviewWindow *w = new PreviewWindow(frames);
+    w->show();
+
 }
 void FramesModel::saveFrame(int frameIndex, QImage frame) {
     if (frameIndex < frames.size())
@@ -101,7 +117,7 @@ void FramesModel::saveAsGIF(std::string filePath)
     GifEnd(&newGifFile);
 }
 
-QVector<QImage> FramesModel::openSSP(std::string filepath) {
+void FramesModel::openSSP(std::string filepath) {
     std::string currentLine;
     std::ifstream fileToOpen (filepath);
 
