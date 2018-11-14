@@ -17,12 +17,18 @@
    <property name="enabled">
     <bool>true</bool>
    </property>
+   <property name="autoFillBackground">
+    <bool>false</bool>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(85, 87, 83);</string>
+   </property>
    <widget class="ScribbleArea" name="canvasWidget" native="true">
     <property name="geometry">
      <rect>
-      <x>145</x>
+      <x>156</x>
       <y>20</y>
-      <width>512</width>
+      <width>501</width>
       <height>512</height>
      </rect>
     </property>
@@ -32,7 +38,7 @@
      <rect>
       <x>10</x>
       <y>20</y>
-      <width>121</width>
+      <width>131</width>
       <height>331</height>
      </rect>
     </property>
@@ -41,24 +47,35 @@
       <rect>
        <x>0</x>
        <y>0</y>
-       <width>121</width>
+       <width>141</width>
        <height>331</height>
       </rect>
      </property>
+     <property name="font">
+      <font>
+       <pointsize>15</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(255, 255, 255);</string>
+     </property>
      <property name="title">
       <string>Brush Tools</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
      </property>
      <widget class="QPushButton" name="dotBrushButton">
       <property name="geometry">
        <rect>
         <x>10</x>
         <y>80</y>
-        <width>101</width>
+        <width>111</width>
         <height>41</height>
        </rect>
       </property>
       <property name="text">
-       <string>Dot</string>
+       <string>Pencil</string>
       </property>
      </widget>
      <widget class="QPushButton" name="lineBrushButton">
@@ -66,7 +83,7 @@
        <rect>
         <x>10</x>
         <y>130</y>
-        <width>101</width>
+        <width>111</width>
         <height>41</height>
        </rect>
       </property>
@@ -101,7 +118,7 @@
        <rect>
         <x>10</x>
         <y>230</y>
-        <width>101</width>
+        <width>111</width>
         <height>41</height>
        </rect>
       </property>
@@ -114,7 +131,7 @@
        <rect>
         <x>10</x>
         <y>280</y>
-        <width>101</width>
+        <width>111</width>
         <height>41</height>
        </rect>
       </property>
@@ -125,14 +142,17 @@
      <widget class="QLabel" name="brushSizeLabel">
       <property name="geometry">
        <rect>
-        <x>10</x>
+        <x>30</x>
         <y>30</y>
-        <width>71</width>
+        <width>81</width>
         <height>17</height>
        </rect>
       </property>
       <property name="text">
        <string>Brush Size</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
       </property>
      </widget>
      <widget class="QSpinBox" name="spinBox">
@@ -140,9 +160,13 @@
        <rect>
         <x>80</x>
         <y>50</y>
-        <width>31</width>
+        <width>41</width>
         <height>21</height>
        </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(255, 255, 255);
+color: rgb(0, 0, 0);</string>
       </property>
       <property name="minimum">
        <number>1</number>
@@ -156,7 +180,7 @@
        <rect>
         <x>10</x>
         <y>180</y>
-        <width>101</width>
+        <width>111</width>
         <height>41</height>
        </rect>
       </property>
@@ -174,6 +198,9 @@
       <width>120</width>
       <height>291</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 255, 255);</string>
     </property>
     <widget class="QPushButton" name="addFrameButton">
      <property name="geometry">
@@ -201,13 +228,26 @@
       <string>Delete Frame</string>
      </property>
     </widget>
+    <widget class="QPushButton" name="clearFrameButton">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>130</y>
+       <width>101</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Clear Frame</string>
+     </property>
+    </widget>
    </widget>
    <widget class="QWidget" name="colorPickerWidget" native="true">
     <property name="geometry">
      <rect>
       <x>10</x>
       <y>360</y>
-      <width>121</width>
+      <width>131</width>
       <height>161</height>
      </rect>
     </property>
@@ -219,6 +259,9 @@
        <width>81</width>
        <height>71</height>
       </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(255, 255, 255);</string>
      </property>
      <property name="text">
       <string>PushButton</string>
@@ -235,6 +278,10 @@
      <height>22</height>
     </rect>
    </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(85, 87, 83);
+color: rgb(255, 255, 255);</string>
+   </property>
    <widget class="QMenu" name="menuFile">
     <property name="title">
      <string>File</string>
@@ -245,6 +292,9 @@
     <addaction name="actionSave_As"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(136, 138, 133);</string>
+    </property>
     <property name="title">
      <string>Help</string>
     </property>
@@ -253,6 +303,9 @@
    <addaction name="menuHelp"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(85, 87, 83);</string>
+   </property>
    <attribute name="toolBarArea">
     <enum>TopToolBarArea</enum>
    </attribute>

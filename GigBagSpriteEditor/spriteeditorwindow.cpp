@@ -10,12 +10,17 @@ SpriteEditorWindow::SpriteEditorWindow(QWidget *parent) :
     ui->setupUi(this);
 
     connect(ui->brushSizeSlider, SIGNAL(sliderReleased()), this, SLOT(sliderChangeBrushSize()));
+    connect(ui->brushSizeSlider, SIGNAL(valueChanged()), this, SLOT(sliderChangeBrushSize()));
+
     connect(ui->spinBox, SIGNAL(valueChanged(int)), this, SLOT(spinBoxChangeBrushSize()));
     connect(ui->dotBrushButton, SIGNAL(released()), this, SLOT(pencilDraw()));
     connect(ui->lineBrushButton, SIGNAL(released()), this, SLOT(lineDraw()));
     connect(ui->eraserButton, SIGNAL(released()), this, SLOT(eraser()));
     connect(ui->rectangleBrushButton, SIGNAL(released()), this, SLOT(rectDraw()));
     connect(ui->circleBrushButton, SIGNAL(released()), this, SLOT(circleDraw()));
+    connect(ui->clearFrameButton, SIGNAL(released()), this, SLOT(clearCanvas()));
+
+    // connect(ui->lineBrushButton, &QPushButton::pressed, this, &SpriteEditorWindow::drawLine);
 
     connect(ui->actionNew, &QAction::triggered,
             this, &SpriteEditorWindow::newFile);
@@ -25,7 +30,6 @@ SpriteEditorWindow::SpriteEditorWindow(QWidget *parent) :
             this, &SpriteEditorWindow::saveFile);
     connect(ui->actionSave_As, &QAction::triggered,
             this, &SpriteEditorWindow::saveAsFile);
-
     connect(ui->addFrameButton, &QPushButton::pressed,
             this, &SpriteEditorWindow::addFrame);
     connect(ui->deleteFrameButton, &QPushButton::pressed,
@@ -77,6 +81,11 @@ void SpriteEditorWindow::circleDraw()
     ui->canvasWidget->toolChooserHelper(4);
 }
 
+void SpriteEditorWindow::clearCanvas()
+{
+    ui->canvasWidget->clearImage();
+}
+
 void SpriteEditorWindow::newFile() {
     std::cout << "new file\n";
     model.newProject();
@@ -96,7 +105,7 @@ void SpriteEditorWindow::saveAsFile() {
     std::cout << "save as file\n" ;
     QImage currentImage = ui->canvasWidget->getImage();
     model.saveFrame(currentFrameIndex, currentImage);
-    model.saveAsGIF("testGIFSaveFile");
+    model.saveAsGIF("testGIFSaveFile.gif");
 }
 
 void SpriteEditorWindow::addFrame() {
