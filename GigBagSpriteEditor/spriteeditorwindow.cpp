@@ -138,15 +138,17 @@ void SpriteEditorWindow::openFile() {
        tr("SSP (*.ssp)"));
 
     model->openSSP(fileName.toUtf8().constData());
+    model->updateTimeline(ui->framesSelectorWidget);
+    ui->canvasWidget->setImage(model->getFrames().at(0));
 }
 void SpriteEditorWindow::saveFile() {
     QImage currentImage = ui->canvasWidget->getImage();
     QString fileName = QFileDialog::getSaveFileName(this,
         tr("Save SSP File"), "",
         tr("SSP (*.ssp)"));
-
-    model->saveAsSSP(fileName.toUtf8().constData());
     model->saveFrame(currentFrameIndex, currentImage);
+    model->saveAsSSP(fileName.toUtf8().constData());
+
 }
 
 void SpriteEditorWindow::saveAsFile() {
@@ -205,7 +207,7 @@ void SpriteEditorWindow::nextFrame()
     QImage image = ui->canvasWidget->getImage();
     QImage newImage = model->nextFrame(ui->framesSelectorWidget, image, currentFrameIndex);
     ui->canvasWidget->setImage(newImage);
-    ui->currentFrameIndexDisplay->setText(QString::number(currentFrameIndex));
+    ui->currentFrameIndexDisplay->setText(QString::number(currentFrameIndex+1));
 }
 
 void SpriteEditorWindow::previousFrame()
@@ -213,7 +215,7 @@ void SpriteEditorWindow::previousFrame()
     QImage image = ui->canvasWidget->getImage();
     QImage newImage = model->previousFrame(ui->framesSelectorWidget, image, currentFrameIndex);
     ui->canvasWidget->setImage(newImage);
-    ui->currentFrameIndexDisplay->setText(QString::number(currentFrameIndex));
+    ui->currentFrameIndexDisplay->setText(QString::number(currentFrameIndex+1));
 }
 
 void SpriteEditorWindow::setDimensions(int dim) {

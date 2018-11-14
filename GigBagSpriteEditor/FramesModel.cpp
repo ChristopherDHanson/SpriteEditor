@@ -109,7 +109,7 @@ void FramesModel::newProject() {
 
 
 void FramesModel::saveAsSSP(std::string fileName) {
-      std::ofstream outfile (fileName + ".ssp");
+      std::ofstream outfile (fileName);
       // Output dimensions, number of frames
       outfile << height << " " << width << "\n";
       outfile << frames.length() << "\n";
@@ -211,4 +211,6 @@ void FramesModel::openSSP(std::string filepath) {
             }
         }
     }
+
+
 }

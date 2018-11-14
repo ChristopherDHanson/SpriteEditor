@@ -8,6 +8,7 @@ PreviewWindow::PreviewWindow(QVector<QImage> frames, QWidget *parent) :
     ui(new Ui::PreviewWindow)
 {
     ui->setupUi(this);
+    ui->frameLabel->setScaledContents(true);
     ui->fpsSpinBox->setRange(0, 12);
     ui->fpsSpinBox->setSingleStep(1);
     ui->fpsSlider->setTickInterval(5);
@@ -36,7 +37,7 @@ void PreviewWindow::on_closeButton_pressed()
 
 void PreviewWindow::showImage(QImage frame)
 {
-    ui->frameLabel->setPixmap(QPixmap::fromImage(frame));
+    ui->frameLabel->setPixmap(QPixmap::fromImage(frame).scaled(ui->frameLabel->height(), ui->frameLabel->width(), Qt::IgnoreAspectRatio));
     ui->frameLabel->show();
 }
 
