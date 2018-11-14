@@ -114,19 +114,23 @@ void SpriteEditorWindow::openFile() {
 }
 void SpriteEditorWindow::saveFile() {
     QImage currentImage = ui->canvasWidget->getImage();
-    model->saveFrame(currentFrameIndex, currentImage);
-
     QString fileName = QFileDialog::getSaveFileName(this,
         tr("Save SSP File"), "",
         tr("SSP (*.ssp)"));
 
     model->saveAsSSP(fileName.toUtf8().constData());
+    model->saveFrame(currentFrameIndex, currentImage);
 }
 
 void SpriteEditorWindow::saveAsFile() {
     QImage currentImage = ui->canvasWidget->getImage();
+
+    QString fileName = QFileDialog::getSaveFileName(this,
+        tr("Save GIF File"), "",
+        tr("GIF (*.gif)"));
+
     model->saveFrame(currentFrameIndex, currentImage);
-    model->saveAsGIF("testGIFSaveFile.gif");
+    model->saveAsGIF(fileName.toUtf8().constData());
 }
 
 void SpriteEditorWindow::addFrame() {
