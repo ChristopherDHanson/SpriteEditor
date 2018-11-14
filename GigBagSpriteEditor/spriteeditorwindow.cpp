@@ -97,7 +97,6 @@ void SpriteEditorWindow::clearCanvas()
 }
 
 void SpriteEditorWindow::newFile() {
-    std::cout << "new file\n";
     sizeSelectionWindow* s = new sizeSelectionWindow(this, this);
     s->show();
     s->raise();
@@ -109,32 +108,41 @@ void SpriteEditorWindow::openFile() {
 
     QString fileName = QFileDialog::getOpenFileName(this,
        tr("Open SSP File"), "",
-       tr("Address Book (*.abk);;All Files (*)"));
+       tr("SSP (*.ssp)"));
 
+<<<<<<< HEAD
     model->openSSP(fileName.toStdString());
+=======
+    model->openSSP(fileName.toUtf8().constData());
+>>>>>>> 3ca60282f525130df5c1b214ce0fbcb96338dcd6
 }
 void SpriteEditorWindow::saveFile() {
-    std::cout << "save file\n";
     QImage currentImage = ui->canvasWidget->getImage();
+    QString fileName = QFileDialog::getSaveFileName(this,
+        tr("Save SSP File"), "",
+        tr("SSP (*.ssp)"));
+
+    model->saveAsSSP(fileName.toUtf8().constData());
     model->saveFrame(currentFrameIndex, currentImage);
-    model->saveAsSSP("testSaveFile");
 }
 
 void SpriteEditorWindow::saveAsFile() {
-    std::cout << "save as file\n" ;
     QImage currentImage = ui->canvasWidget->getImage();
+
+    QString fileName = QFileDialog::getSaveFileName(this,
+        tr("Save GIF File"), "",
+        tr("GIF (*.gif)"));
+
     model->saveFrame(currentFrameIndex, currentImage);
-    model->saveAsGIF("testGIFSaveFile.gif");
+    model->saveAsGIF(fileName.toUtf8().constData());
 }
 
 void SpriteEditorWindow::addFrame() {
-    std::cout << "add frame\n";
     QImage currentImage = ui->canvasWidget->getImage();
     model->saveFrame(currentFrameIndex, currentImage);
     model->addDuplicateFrame();
 }
 void SpriteEditorWindow::deleteFrame() {
-   std::cout << "delete frame\n";
    model->deleteFrame(currentFrameIndex);
 }
 
