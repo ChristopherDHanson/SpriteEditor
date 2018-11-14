@@ -84,23 +84,6 @@ void SpriteEditorWindow::circleDraw()
 void SpriteEditorWindow::clearCanvas()
 {
     ui->canvasWidget->clearImage();
-{
-    ui->canvasWidget->toolChooserHelper(1);
-}
-
-void SpriteEditorWindow::eraser()
-{
-    ui->canvasWidget->toolChooserHelper(2);
-}
-
-void SpriteEditorWindow::rectDraw()
-{
-    ui->canvasWidget->toolChooserHelper(3);
-}
-
-void SpriteEditorWindow::circleDraw()
-{
-    ui->canvasWidget->toolChooserHelper(4);
 }
 
 void SpriteEditorWindow::newFile() {
