@@ -61,6 +61,12 @@ QImage ScribbleArea::getImage()
     return visibleImage;
 }
 
+void ScribbleArea::setImage(QImage newImage)
+{
+    image = newImage;
+    update();
+}
+
 void ScribbleArea::setPenColor(const QColor &newColor)
 {
     myPenColor = newColor;

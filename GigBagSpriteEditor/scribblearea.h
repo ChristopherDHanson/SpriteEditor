@@ -20,7 +20,8 @@ public:
         void setPenWidth(int newWidth);
         void toolChooserHelper(int tool);
         void setImageSize(int size);
-    QImage getImage();
+        void setImage(QImage newImage);
+        QImage getImage();
 private:
         bool openImage(const QString &fileName);
         bool saveImage(const QString &fileName, const char *fileFormat);
