@@ -18,7 +18,7 @@ SpriteEditorWindow::SpriteEditorWindow(QWidget *parent) :
     connect(ui->eraserButton, SIGNAL(released()), this, SLOT(eraser()));
     connect(ui->rectangleBrushButton, SIGNAL(released()), this, SLOT(rectDraw()));
     connect(ui->circleBrushButton, SIGNAL(released()), this, SLOT(circleDraw()));
-    connect(ui->clearFrameButton, SIGNAL(released()), this, SLOT(clearCanvas()));
+    //connect(ui->clearFrameButton, SIGNAL(released()), this, SLOT(clearCanvas()));
 
     // connect(ui->lineBrushButton, &QPushButton::pressed, this, &SpriteEditorWindow::drawLine);
 
