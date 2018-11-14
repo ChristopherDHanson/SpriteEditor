@@ -40,6 +40,11 @@ SpriteEditorWindow::SpriteEditorWindow(QWidget *parent) :
     connect(ui->showPreviewButton, &QPushButton::pressed,
             this, &SpriteEditorWindow::showPreview);
 
+    connect(ui->nextFrameButton, &QPushButton::pressed,
+            this, &SpriteEditorWindow::incrementCurrentFrameIndex);
+    connect(ui->previousFrameButton, &QPushButton::pressed,
+            this, &SpriteEditorWindow::decrementCurrentFrameIndex);
+
     sizeSelectionWindow* s = new sizeSelectionWindow(this, this);
     s->show();
     s->raise();
@@ -49,6 +54,23 @@ SpriteEditorWindow::SpriteEditorWindow(QWidget *parent) :
 SpriteEditorWindow::~SpriteEditorWindow()
 {
     delete ui;
+}
+
+void SpriteEditorWindow::incrementCurrentFrameIndex() {
+    QImage currentImage = ui->canvasWidget->getImage();
+    model->saveFrame(currentFrameIndex, currentImage);
+    if (currentFrameIndex < model->getFrames().size()) {
+        currentFrameIndex++;
+    }
+    ui->currentFrameIndexDisplay->setText(QString::number(currentFrameIndex));
+}
+void SpriteEditorWindow::decrementCurrentFrameIndex() {
+    QImage currentImage = ui->canvasWidget->getImage();
+    model->saveFrame(currentFrameIndex, currentImage);
+    if (currentFrameIndex > 1) {
+        currentFrameIndex--;
+    }
+    ui->currentFrameIndexDisplay->setText(QString::number(currentFrameIndex));
 }
 
 void SpriteEditorWindow::sliderChangeBrushSize()
