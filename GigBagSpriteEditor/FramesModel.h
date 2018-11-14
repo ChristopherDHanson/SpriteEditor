@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QBuffer>
 #include <fstream>
+#include "framesarea.h"
 
 class FramesModel {
 private:
@@ -24,6 +25,9 @@ public:
   void deleteFrame(int index);
   void showPreview();
   void updateCurrentFrame();
+  QImage nextFrame(framesarea *fa, QImage image, int &currentFrameIndex);
+  QImage previousFrame(framesarea *fa, QImage image, int &currentFrameIndex);
+  void updateTimeline(framesarea *fa);
 
   // Each time the user changes frames or saves (slot from save signal calls this, then saveAsxxx method)
   void saveFrame(int frameIndex, QImage frame);

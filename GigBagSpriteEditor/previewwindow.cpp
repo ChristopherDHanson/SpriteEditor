@@ -19,7 +19,7 @@ PreviewWindow::PreviewWindow(QVector<QImage> frames, QWidget *parent) :
         showImage(frames.at(currentFrameIndex));
         timer = new QTimer(this);
         connect(timer, SIGNAL(timeout()), this, SLOT(switchImage()));
-        timer->start(1000);
+        timer->start(0);
     }
 }
 

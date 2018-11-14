@@ -110,11 +110,7 @@ void SpriteEditorWindow::openFile() {
        tr("Open SSP File"), "",
        tr("SSP (*.ssp)"));
 
-<<<<<<< HEAD
-    model->openSSP(fileName.toStdString());
-=======
     model->openSSP(fileName.toUtf8().constData());
->>>>>>> 3ca60282f525130df5c1b214ce0fbcb96338dcd6
 }
 void SpriteEditorWindow::saveFile() {
     QImage currentImage = ui->canvasWidget->getImage();
@@ -141,9 +137,11 @@ void SpriteEditorWindow::addFrame() {
     QImage currentImage = ui->canvasWidget->getImage();
     model->saveFrame(currentFrameIndex, currentImage);
     model->addDuplicateFrame();
+    model->updateTimeline(ui->framesSelectorWidget);
 }
 void SpriteEditorWindow::deleteFrame() {
    model->deleteFrame(currentFrameIndex);
+   model->updateTimeline(ui->framesSelectorWidget);
 }
 
 void SpriteEditorWindow::showPreview()
@@ -164,6 +162,20 @@ void SpriteEditorWindow::on_colorPaletteButton_clicked()
         ui->colorPaletteButton->setPalette(palette);
         ui->canvasWidget->setPenColor(color);
     }
+}
+
+void SpriteEditorWindow::nextFrame()
+{
+    QImage image = ui->canvasWidget->getImage();
+    QImage newImage = model->nextFrame(ui->framesSelectorWidget, image, currentFrameIndex);
+    ui->canvasWidget->setImage(newImage);
+}
+
+void SpriteEditorWindow::previousFrame()
+{
+    QImage image = ui->canvasWidget->getImage();
+    QImage newImage = model->previousFrame(ui->framesSelectorWidget, image, currentFrameIndex);
+    ui->canvasWidget->setImage(newImage);
 }
 
 void SpriteEditorWindow::setDimensions(int dim) {

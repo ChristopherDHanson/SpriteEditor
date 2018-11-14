@@ -38,6 +38,7 @@ void FramesModel::addDuplicateFrame() {
     }
     frames.push_back(temp);
 }
+
 void FramesModel::addNewFrame() {
     QImage temp;
     if (frames.length() > 0) {
@@ -45,16 +46,34 @@ void FramesModel::addNewFrame() {
     }
     frames.push_back(temp);
 }
+
 void FramesModel::deleteFrame(int index) {
     if (index >= 0 && index < frames.length() - 1) {
         frames.remove(index);
     }
 }
 
-<<<<<<< HEAD
-=======
+QImage FramesModel::nextFrame(framesarea *fa, QImage image, int &currentFrameIndex){
+    saveFrame(currentFrameIndex, image);
+    currentFrameIndex = (currentFrameIndex + 1) % frames.length();
+    fa->setSelectedFrameIndex(currentFrameIndex);
+    fa->updateFramesArea(&frames);
+    return frames[currentFrameIndex];
+}
 
->>>>>>> 3ca60282f525130df5c1b214ce0fbcb96338dcd6
+QImage FramesModel::previousFrame(framesarea *fa,QImage image, int &currentFrameIndex){
+    saveFrame(currentFrameIndex, image);
+    currentFrameIndex = (currentFrameIndex - 1) % frames.length();
+    fa->setSelectedFrameIndex(currentFrameIndex);
+    fa->updateFramesArea(&frames);
+    return frames[currentFrameIndex];
+}
+
+void FramesModel::updateTimeline(framesarea *fa)
+{
+    fa->updateFramesArea(&frames);
+}
+
 void FramesModel::showPreview()
 {
     PreviewWindow *w = new PreviewWindow(frames);
@@ -64,6 +83,8 @@ void FramesModel::showPreview()
 void FramesModel::saveFrame(int frameIndex, QImage frame) {
     if (frameIndex < frames.size())
         frames[frameIndex] = QImage(frame);
+    else
+        frames.append(QImage(frame));
 }
 void FramesModel::swapFrameOrder(int firstIndex, int secondIndex) {
     if (firstIndex < frames.length() && secondIndex < frames.length()) {

@@ -32,18 +32,18 @@ framesarea::framesarea(QWidget *parent) : QWidget(parent)
 
     // For testing only
 
-    clearFrames();
-    for (int i = 0; i < 5; i++){
-        QPushButton *button = new QPushButton(QString::number(i));
-        button->setFlat(true);
-        button->setAutoFillBackground(true);
-        button->setContentsMargins(0,0,0,0);
-        button->setStyleSheet("background-color: red");
-        button->setFixedSize(70, 70);
-        buttonFrames->append(button);
-        vlayout->addWidget(button);
-    }
-    setSelectedFrameIndex(0);
+//    clearFrames();
+//    for (int i = 0; i < 5; i++){
+//        QPushButton *button = new QPushButton(QString::number(i));
+//        button->setFlat(true);
+//        button->setAutoFillBackground(true);
+//        button->setContentsMargins(0,0,0,0);
+//        button->setStyleSheet("background-color: red");
+//        button->setFixedSize(70, 70);
+//        buttonFrames->append(button);
+//        vlayout->addWidget(button);
+//    }
+//    setSelectedFrameIndex(0);
     // Above For Testing Only
     this->show();
 }
