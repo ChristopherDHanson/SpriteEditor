@@ -400,7 +400,7 @@ color: rgb(0, 0, 0);</string>
       <bool>false</bool>
      </property>
      <property name="text">
-      <string/>
+      <string>Click</string>
      </property>
      <property name="flat">
       <bool>true</bool>

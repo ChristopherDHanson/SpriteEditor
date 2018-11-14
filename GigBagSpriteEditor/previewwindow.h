@@ -20,6 +20,7 @@ private slots:
     void on_closeButton_pressed();
     void on_fpsSpinBox_valueChanged(int arg1);
     void on_fpsSlider_valueChanged(int value);
+    void switchImage();
 
 private:
     Ui::PreviewWindow *ui;
@@ -27,7 +28,6 @@ private:
     QVector<QImage> frames;
     QTimer *timer;
     void showImage(QImage frame);
-    void switchImage();
     void setTimer(int fps);
 };
 
