@@ -1,5 +1,7 @@
 #include "FramesModel.h"
 #include "gif.h"
+#include "previewwindow.h"
+#include "iostream"
 
 FramesModel::FramesModel()
 {
@@ -30,8 +32,16 @@ void FramesModel::addFrame() {
     }
     frames.push_back(temp);
 }
+
 void FramesModel::deleteFrame(int index) {
     frames.remove(index);
+}
+
+void FramesModel::showPreview()
+{
+    PreviewWindow *w = new PreviewWindow(frames);
+    w->show();
+
 }
 void FramesModel::saveFrame(int frameIndex, QImage frame) {
     if (frameIndex < frames.size())

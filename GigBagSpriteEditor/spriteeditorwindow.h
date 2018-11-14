@@ -30,6 +30,8 @@ private slots:
     void saveAsFile();
     void addFrame();
     void deleteFrame();
+    void showPreview();
+    void showColorPalette();
 };
 
 #endif // SPRITEEDITORWINDOW_H

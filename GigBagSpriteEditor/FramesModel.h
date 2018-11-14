@@ -21,6 +21,7 @@ public:
   // Should be called whenever user adds new frame to their sprite
   void addFrame();
   void deleteFrame(int index);
+  void showPreview();
   // Each time the user changes frames or saves (slot from save signal calls this, then saveAsxxx method)
   void saveFrame(int frameIndex, QImage frame);
   void swapFrameOrder(int firstIndex, int secondIndex);
