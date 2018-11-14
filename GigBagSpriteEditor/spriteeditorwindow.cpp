@@ -5,6 +5,7 @@
 #include "framesarea.h"
 #include "QColorDialog"
 #include "previewwindow.h"
+#include "QFileDialog"
 
 SpriteEditorWindow::SpriteEditorWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -110,7 +111,7 @@ void SpriteEditorWindow::openFile() {
        tr("Open SSP File"), "",
        tr("Address Book (*.abk);;All Files (*)"));
 
-    model->openSSP(fileName);
+    model->openSSP(fileName.toStdString());
 }
 void SpriteEditorWindow::saveFile() {
     std::cout << "save file\n";
