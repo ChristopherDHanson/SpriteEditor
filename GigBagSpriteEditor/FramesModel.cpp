@@ -66,8 +66,8 @@ void FramesModel::saveAsSSP(std::string fileName) {
       outfile << frames.length() << "\n";
       // Output data
       for (QImage frame : frames) {
-          for ( int row = 1; row < frame.height() - 1; ++row ) {
-              for ( int col = 1; col < frame.width() - 1; ++col )
+          for ( int row = 1; row < frame.height(); ++row ) {
+              for ( int col = 1; col < frame.width(); ++col )
               {
                   QColor clrCurrent( frame.pixel( row, col ) );
 
@@ -99,11 +99,6 @@ void FramesModel::saveAsGIF(std::string filePath)
 
     //complete EOF code
     GifEnd(&newGifFile);
-
-    //safe file to stream
-    std::ofstream outfile (filePath + ".gif");
-    outfile << newGifFile.f;
-    outfile.close();
 }
 
 QVector<QImage> FramesModel::openSSP(std::string filepath) {
