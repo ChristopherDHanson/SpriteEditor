@@ -430,7 +430,7 @@ color: rgb(0, 0, 0);</string>
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>20</height>
+     <height>22</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -442,7 +442,6 @@ color: rgb(255, 255, 255);</string>
      <string>File</string>
     </property>
     <addaction name="actionNew"/>
-    <addaction name="actionOpen"/>
     <addaction name="actionSave"/>
     <addaction name="actionSave_As"/>
    </widget>
