@@ -60,5 +60,4 @@ void PreviewWindow::on_fpsSlider_valueChanged(int value)
 {
     setTimer(value);
     ui->fpsSpinBox->setValue(value);
-    this->destroy();
 }

@@ -4,6 +4,7 @@
 #include "scribblearea.h"
 #include "framesarea.h"
 #include "QColorDialog"
+#include "previewwindow.h"
 
 SpriteEditorWindow::SpriteEditorWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -122,6 +123,8 @@ void SpriteEditorWindow::saveAsFile() {
 
 void SpriteEditorWindow::addFrame() {
     std::cout << "add frame\n";
+    QImage currentImage = ui->canvasWidget->getImage();
+    model->saveFrame(currentFrameIndex, currentImage);
     model->addDuplicateFrame();
 }
 void SpriteEditorWindow::deleteFrame() {
@@ -131,8 +134,8 @@ void SpriteEditorWindow::deleteFrame() {
 
 void SpriteEditorWindow::showPreview()
 {
-    std::cout << "show preview\n";
-    model->showPreview();
+    PreviewWindow *w = new PreviewWindow(model->getFrames());
+    w->show();
 }
 
 void SpriteEditorWindow::on_colorPaletteButton_clicked()
