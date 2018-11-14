@@ -96,6 +96,10 @@ void SpriteEditorWindow::clearCanvas()
 
 void SpriteEditorWindow::newFile() {
     std::cout << "new file\n";
+    sizeSelectionWindow* s = new sizeSelectionWindow(this, this);
+    s->show();
+    s->raise();
+    s->activateWindow();
     model->newProject();
 }
 void SpriteEditorWindow::openFile() {
@@ -148,4 +152,6 @@ void SpriteEditorWindow::on_colorPaletteButton_clicked()
 void SpriteEditorWindow::setDimensions(int dim) {
     dimensions = dim;
     model = new FramesModel(dimensions);
+
+    ui->canvasWidget->setImageSize(dim);
 }
