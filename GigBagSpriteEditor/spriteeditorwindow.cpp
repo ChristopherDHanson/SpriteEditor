@@ -96,7 +96,7 @@ void SpriteEditorWindow::saveAsFile() {
     std::cout << "save as file\n" ;
     QImage currentImage = ui->canvasWidget->getImage();
     model.saveFrame(currentFrameIndex, currentImage);
-    model.saveAsGIF("testGIFSaveFile");
+    model.saveAsGIF("testGIFSaveFile.gif");
 }
 
 void SpriteEditorWindow::addFrame() {
