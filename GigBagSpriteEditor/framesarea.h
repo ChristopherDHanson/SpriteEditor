@@ -4,20 +4,18 @@
 #include <QWidget>
 #include <QScrollArea>
 #include <QVBoxLayout>
-#include "FramesModel.h"
+#include <QPushButton>
 
 class framesarea : public QWidget
 {
     QVBoxLayout *vlayout = nullptr;
-    FramesModel *model = nullptr;
+    QVector<QPushButton*> *buttonFrames = new QVector<QPushButton*>();
     int selectedFrameIndex;
+    void clearFrames();
 public:
     explicit framesarea(QWidget *parent = nullptr);
-    void setModel(FramesModel *_model);
-    void updateFramesArea();
+    void updateFramesArea(QVector<QImage> *frames);
     void setSelectedFrameIndex(int frameIndex);
-    void selectPreviousFrame();
-    void selectNextFrame();
 };
 
 #endif // FRAMESAREA_H
