@@ -4,8 +4,7 @@
 
 FramesModel::FramesModel()
 {
-    height = 0;
-    width = 0;
+  
 }
 FramesModel::~FramesModel()
 {
@@ -24,15 +23,24 @@ QVector<QImage> FramesModel::getFrames() {
     return frames;
 }
 
-void FramesModel::addFrame() {
+void FramesModel::addDuplicateFrame() {
     QImage temp;
     if (frames.length() > 0) {
         temp = frames[frames.length() - 1];
     }
     frames.push_back(temp);
 }
+void FramesModel::addNewFrame() {
+    QImage temp;
+    if (frames.length() > 0) {
+        temp = QImage(frames[frames.length() - 1].size(), QImage::Format_RGB32);
+    }
+    frames.push_back(temp);
+}
 void FramesModel::deleteFrame(int index) {
-    frames.remove(index);
+    if (index >= 0 && index < frames.length() - 1) {
+        frames.remove(index);
+    }
 }
 void FramesModel::saveFrame(int frameIndex, QImage frame) {
     if (frameIndex < frames.size())
@@ -79,31 +87,17 @@ void FramesModel::saveAsGIF(std::string filePath)
     GifWriter newGifFile;
 
     //initialize writer
-    GifBegin(&newGifFile, filePath.c_str(), width, height, 10);
+    GifBegin(&newGifFile, filePath.c_str(), frames[0].width(), frames[0].height(), 10);
 
     //take each current frame and write it
     for (size_t i = 0; i < frames.length(); i++)
     {
-      QImage original;
-      QImage temp = frames[i];
-      QByteArray imageByteArr;
-      QBuffer buffer(&imageByteArr);
-      buffer.open(QIODevice::WriteOnly);
-      original.save(&buffer, "");
-
-      char* imageData = imageByteArr.data();
-      uint8_t* imageData8t = (uint8_t*)imageData;
-
-      GifWriteFrame(&newGifFile, imageData8t, width, height, 10, 8, false);
+      QImage original = frames[i].convertToFormat(QImage::Format_RGBA8888);
+      GifWriteFrame(&newGifFile, original.bits(), frames[i].width(), frames[i].height(), 10, 8, false);
     }
 
     //complete EOF code
     GifEnd(&newGifFile);
-
-    //safe file to stream
-    std::ofstream outfile (filePath + ".gif");
-    outfile << newGifFile.f;
-    outfile.close();
 }
 
 QVector<QImage> FramesModel::openSSP(std::string filepath) {
