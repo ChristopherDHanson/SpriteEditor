@@ -144,6 +144,7 @@ void ScribbleArea::mouseReleaseEvent(QMouseEvent *event)
     qDebug() << "current frame index on mouse release:" << *currentFrameIndex;
     model->saveFrame(*currentFrameIndex, getImage());
     model->updateTimeline(framesArea);
+    framesArea->setSelectedFrameIndex(*currentFrameIndex);
 }
 
 void ScribbleArea::init(int &_currentFrameIndex, framesarea *_framesArea, FramesModel *_model){

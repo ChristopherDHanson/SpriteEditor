@@ -46,6 +46,7 @@ private slots:
     void incrementCurrentFrameIndex();
     void decrementCurrentFrameIndex();
     void addFirstFrame();
+    void clearFrame();
 };
 
 #endif // SPRITEEDITORWINDOW_H

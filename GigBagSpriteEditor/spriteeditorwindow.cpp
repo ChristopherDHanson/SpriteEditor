@@ -44,9 +44,12 @@ SpriteEditorWindow::SpriteEditorWindow(QWidget *parent) :
             this, &SpriteEditorWindow::nextFrame);
     connect(ui->previousFrameButton, &QPushButton::pressed,
             this, &SpriteEditorWindow::previousFrame);
+    connect(ui->clearFrameButton, &QPushButton::pressed,
+            this, &SpriteEditorWindow::clearFrame);
 
 
     //set default color
+    ui->clearFrameButton->setStyleSheet("color: white");
     ui->colorPaletteButton->setFlat(false);
     ui->colorPaletteButton->setStyleSheet("QPushButton {background-color: black; border: 0px;}");
     ui->canvasWidget->setPenColor(Qt::black);
@@ -93,6 +96,15 @@ void SpriteEditorWindow::spinBoxChangeBrushSize()
     int brushSizeValue = ui->spinBox->value();
     ui->canvasWidget->setPenWidth(brushSizeValue);
     ui->brushSizeSlider->setSliderPosition(brushSizeValue);
+}
+
+void SpriteEditorWindow::clearFrame(){
+    QImage clearFrame = QImage(model->getFrames()[0].size(), QImage::Format_RGB32);
+    clearFrame.fill(Qt::white);
+    model->saveFrame(currentFrameIndex, clearFrame);
+    ui->canvasWidget->setImage(clearFrame);
+    model->updateTimeline(ui->framesSelectorWidget);
+    ui->framesSelectorWidget->setSelectedFrameIndex(currentFrameIndex);
 }
 
 void SpriteEditorWindow::pencilDraw()
