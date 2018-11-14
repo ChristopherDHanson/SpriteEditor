@@ -52,7 +52,7 @@ void FramesModel::deleteFrame(int &currentFrameIndex) {
         return;
     if (currentFrameIndex >= 0 && currentFrameIndex < frames.length()) {
         frames.remove(currentFrameIndex);
-        if (currentFrameIndex == frames.length() + 1){
+        if (currentFrameIndex == frames.length()){
             currentFrameIndex = frames.length() - 1;
         }
     }

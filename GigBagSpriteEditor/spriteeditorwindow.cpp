@@ -194,6 +194,7 @@ void SpriteEditorWindow::addFirstFrame(){
 
 void SpriteEditorWindow::deleteFrame() {
    model->deleteFrame(currentFrameIndex);
+   ui->canvasWidget->setImage(model->getFrames()[currentFrameIndex]);
    model->updateTimeline(ui->framesSelectorWidget);
    ui->framesSelectorWidget->setSelectedFrameIndex(currentFrameIndex);
 }
