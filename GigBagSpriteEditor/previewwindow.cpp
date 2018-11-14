@@ -1,6 +1,7 @@
 #include "previewwindow.h"
 #include "ui_previewwindow.h"
 #include "QTimer"
+#include <iostream>
 
 PreviewWindow::PreviewWindow(QVector<QImage> frames, QWidget *parent) :
     QDialog(parent),
@@ -17,8 +18,8 @@ PreviewWindow::PreviewWindow(QVector<QImage> frames, QWidget *parent) :
     {
         showImage(frames.at(currentFrameIndex));
         timer = new QTimer(this);
-        connect(timer, SIGNAL(timeout()), this, SLOT(update()));
-        timer->start(0);
+        connect(timer, SIGNAL(timeout()), this, SLOT(switchImage()));
+        timer->start(1000);
     }
 }
 
@@ -40,7 +41,8 @@ void PreviewWindow::showImage(QImage frame)
 
 void PreviewWindow::switchImage()
 {
-    currentFrameIndex++;
+    currentFrameIndex = (currentFrameIndex+1) % frames.size();
+    std::cout << currentFrameIndex << std::endl;
     showImage(frames.at(currentFrameIndex));
 }
 

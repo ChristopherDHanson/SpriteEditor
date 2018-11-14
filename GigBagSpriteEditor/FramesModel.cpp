@@ -51,12 +51,13 @@ void FramesModel::deleteFrame(int index) {
     }
 }
 
+
 void FramesModel::showPreview()
 {
     PreviewWindow *w = new PreviewWindow(frames);
     w->show();
-
 }
+
 void FramesModel::saveFrame(int frameIndex, QImage frame) {
     if (frameIndex < frames.size())
         frames[frameIndex] = QImage(frame);
