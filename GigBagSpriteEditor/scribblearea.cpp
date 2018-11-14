@@ -9,9 +9,6 @@
 
 #include "iostream"
 #include "scribblearea.h"
-//#include <QMouseEvent>
-//#include <QPainter>
-//#include <QtConfig>
 
 ScribbleArea::ScribbleArea(QWidget *parent) : QWidget(parent)
 {
@@ -24,6 +21,7 @@ ScribbleArea::ScribbleArea(QWidget *parent) : QWidget(parent)
     imageSize = 64.0;
     image = QImage(imageSize, imageSize, QImage::Format_RGB32);
     image.fill(Qt::white);
+    mousePressed = false;
 }
 
 bool ScribbleArea::openImage(const QString &fileName)
@@ -85,11 +83,22 @@ void ScribbleArea::clearImage()
 
 void ScribbleArea::mousePressEvent(QMouseEvent *event)
 {
+    mousePressed = true;
+
     if (event->button() == Qt::LeftButton)
     {
         //lastPoint = event->pos();
         lastPoint = normalizePos(event);
         scribbling = true;
+    }
+
+    if(drawTool == 1){
+        OLine.setP1(event->pos());
+        OLine.setP2(event->pos());
+    }
+    else if (drawTool == 3 || drawTool == 4){
+        ORect.setTopLeft(event->pos());
+        ORect.setBottomRight(event->pos());
     }
 }
 
@@ -100,15 +109,34 @@ void ScribbleArea::mouseMoveEvent(QMouseEvent *event)
 
     else if ((event->buttons() & Qt::LeftButton) && scribbling && drawTool == 2)
         eraserTool(normalizePos(event));
+
+    if(event->type() == QEvent::MouseMove){
+        if(drawTool == 1){
+            OLine.setP2(event->pos());
+        }
+        else if (drawTool == 3 || drawTool == 4){
+            ORect.setBottomRight(event->pos());
+        }
+        else if (drawTool == 0){
+            OPoint.setX((event->pos()).rx());
+            OPoint.setY((event->pos()).ry());
+        }
+    }
+
+    update();
 }
 
 void ScribbleArea::mouseReleaseEvent(QMouseEvent *event)
 {
+    mousePressed = false;
+
     if (event->button() == Qt::LeftButton && scribbling)
     {
         drawingTools(normalizePos(event));
         scribbling = false;
     }
+
+    update();
 }
 
 void ScribbleArea::paintEvent(QPaintEvent *event)
@@ -128,10 +156,28 @@ void ScribbleArea::paintEvent(QPaintEvent *event)
     QImage tempImage;
     tempImage = tempPix.toImage();
 
-
     //painter.drawPixmap(dirtyRect, tempPix, dirtyRect);
     painter.drawImage(dirtyRect, tempImage, dirtyRect);
-    update();
+
+    if(mousePressed)
+    {
+        painter.drawPixmap(0,0,tempPix);
+        if(drawTool == 1)
+        {
+            painter.drawLine(OLine);
+        }
+        else if (drawTool == 3)
+        {
+            painter.drawRect(ORect);
+        }
+        else if (drawTool == 4)
+        {
+            int rad = (myPenWidth / 2) + 2;
+            painter.drawEllipse(ORect.normalized().adjusted(-rad, -rad, +rad, +rad));
+        }
+    }
+
+    painter.end();
 }
 
 // assigns tool choice int for corresponding tool function for switch

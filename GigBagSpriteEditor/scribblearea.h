@@ -50,6 +50,8 @@ private:
         void resizeImage(QImage *image, const QSize &newSize);
         QPoint normalizePos(QMouseEvent *event);
 
+        bool mouseMoved;
+        bool mousePressed;
         bool modified;
         bool scribbling;
         int myPenWidth;
@@ -57,6 +59,10 @@ private:
         QColor myPenColor;
         QImage image;
         QPoint lastPoint;
+        QLine OLine;
+        QRect ORect;
+        QPoint OPoint;
+
 };
 
 #endif // SCRIBBLEAREA_H
