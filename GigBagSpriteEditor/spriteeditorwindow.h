@@ -25,7 +25,7 @@ private:
     int dimensions;
 
 private slots:
-    void sliderChangeBrushSize();
+    void sliderChangeBrushSize(int value);
     void spinBoxChangeBrushSize();
     void pencilDraw();
     void lineDraw();
@@ -45,6 +45,7 @@ private slots:
     void previousFrame();
     void incrementCurrentFrameIndex();
     void decrementCurrentFrameIndex();
+    void addFirstFrame();
 };
 
 #endif // SPRITEEDITORWINDOW_H

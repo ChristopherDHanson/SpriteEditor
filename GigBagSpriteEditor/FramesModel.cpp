@@ -2,7 +2,8 @@
 #include "gif.h"
 #include <qbuffer.h>
 #include "previewwindow.h"
-#include "iostream"
+#include <iostream>
+#include <QtDebug>
 
 FramesModel::FramesModel()
 {
@@ -35,7 +36,7 @@ void FramesModel::addDuplicateFrame() {
     if (frames.length() > 0) {
         temp = frames[frames.length() - 1];
     }
-    frames.push_back(temp);
+    frames.append(temp);
 }
 
 void FramesModel::addNewFrame() {
@@ -43,27 +44,35 @@ void FramesModel::addNewFrame() {
     if (frames.length() > 0) {
         temp = QImage(frames[frames.length() - 1].size(), QImage::Format_RGB32);
     }
-    frames.push_back(temp);
+    frames.append(temp);
 }
 
-void FramesModel::deleteFrame(int index) {
-    if (index >= 0 && index < frames.length() - 1) {
-        frames.remove(index);
+void FramesModel::deleteFrame(int &currentFrameIndex) {
+    if (frames.length() == 1)
+        return;
+    if (currentFrameIndex >= 0 && currentFrameIndex < frames.length()) {
+        frames.remove(currentFrameIndex);
+        if (currentFrameIndex == frames.length())
+            currentFrameIndex = frames.length() - 1;
     }
 }
 
-<<<<<<< HEAD
 QImage FramesModel::nextFrame(framesarea *fa, QImage image, int &currentFrameIndex){
+    qDebug() << "oldIndex:" << currentFrameIndex << "  frames.length:" << frames.length();
     saveFrame(currentFrameIndex, image);
     currentFrameIndex = (currentFrameIndex + 1) % frames.length();
+    qDebug() << "newIndex:" << currentFrameIndex << "  frames.length:" << frames.length();
     fa->setSelectedFrameIndex(currentFrameIndex);
     fa->updateFramesArea(&frames);
     return frames[currentFrameIndex];
 }
 
 QImage FramesModel::previousFrame(framesarea *fa,QImage image, int &currentFrameIndex){
+     qDebug() << "oldIndex:" << currentFrameIndex << "  frames.length:" << frames.length();
     saveFrame(currentFrameIndex, image);
-    currentFrameIndex = (currentFrameIndex - 1) % frames.length();
+    currentFrameIndex = currentFrameIndex - 1;
+    if (currentFrameIndex < 0) currentFrameIndex = frames.length() - 1;
+    qDebug() << "newIndex:" << currentFrameIndex << "  frames.length:" << frames.length();
     fa->setSelectedFrameIndex(currentFrameIndex);
     fa->updateFramesArea(&frames);
     return frames[currentFrameIndex];
@@ -74,8 +83,7 @@ void FramesModel::updateTimeline(framesarea *fa)
     fa->updateFramesArea(&frames);
 }
 
-=======
->>>>>>> ac963098479f06777a02a5bc43dbf6e4cf94fcd8
+
 void FramesModel::showPreview()
 {
     PreviewWindow *w = new PreviewWindow(frames);
@@ -83,7 +91,7 @@ void FramesModel::showPreview()
 }
 
 void FramesModel::saveFrame(int frameIndex, QImage frame) {
-    if (frameIndex < frames.size())
+    if (frameIndex < frames.length())
         frames[frameIndex] = QImage(frame);
     else
         frames.append(QImage(frame));

@@ -22,9 +22,8 @@ public:
   // Should be called whenever user adds new frame to their sprite
   void addDuplicateFrame();
   void addNewFrame();
-  void deleteFrame(int index);
+  void deleteFrame(int &currentFrameIndex);
   void showPreview();
-  void updateCurrentFrame();
   QImage nextFrame(framesarea *fa, QImage image, int &currentFrameIndex);
   QImage previousFrame(framesarea *fa, QImage image, int &currentFrameIndex);
   void updateTimeline(framesarea *fa);

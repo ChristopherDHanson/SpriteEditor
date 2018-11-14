@@ -10,7 +10,7 @@ PreviewWindow::PreviewWindow(QVector<QImage> frames, QWidget *parent) :
     ui->setupUi(this);
     ui->fpsSpinBox->setRange(0, 12);
     ui->fpsSpinBox->setSingleStep(1);
-    ui->fpsSlider->setTickInterval(1);
+    ui->fpsSlider->setTickInterval(5);
     ui->fpsSlider->setRange(0, 12);
     this->frames = frames;
     currentFrameIndex = 0;
@@ -30,6 +30,7 @@ PreviewWindow::~PreviewWindow()
 
 void PreviewWindow::on_closeButton_pressed()
 {
+    timer->stop();
     this->close();
 }
 
@@ -42,14 +43,20 @@ void PreviewWindow::showImage(QImage frame)
 void PreviewWindow::switchImage()
 {
     currentFrameIndex = (currentFrameIndex+1) % frames.size();
-    std::cout << currentFrameIndex << std::endl;
+    //std::cout << currentFrameIndex << std::endl;
     showImage(frames.at(currentFrameIndex));
 }
 
 void PreviewWindow::setTimer(int fps)
 {
-    if (frames.size() > 0)
+    if (fps == 0)
+        timer->stop();
+    else if (frames.size() > 0){
         timer->setInterval(1000/fps);
+        if (!timer->isActive())
+            timer->start();
+    }
+
 }
 
 void PreviewWindow::on_fpsSpinBox_valueChanged(int arg1)

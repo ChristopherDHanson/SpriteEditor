@@ -6,6 +6,7 @@
 #include "QColorDialog"
 #include "previewwindow.h"
 #include "QFileDialog"
+#include <iostream>
 
 SpriteEditorWindow::SpriteEditorWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -14,7 +15,7 @@ SpriteEditorWindow::SpriteEditorWindow(QWidget *parent) :
     currentFrameIndex = 0;
     ui->setupUi(this);
 
-    connect(ui->brushSizeSlider, SIGNAL(valueChanged()), this, SLOT(sliderChangeBrushSize()));
+    connect(ui->brushSizeSlider, SIGNAL(valueChanged(int)), this, SLOT(sliderChangeBrushSize(int)));
     connect(ui->spinBox, SIGNAL(valueChanged(int)), this, SLOT(spinBoxChangeBrushSize()));
     connect(ui->dotBrushButton, SIGNAL(released()), this, SLOT(pencilDraw()));
     connect(ui->lineBrushButton, SIGNAL(released()), this, SLOT(lineDraw()));
@@ -41,9 +42,11 @@ SpriteEditorWindow::SpriteEditorWindow(QWidget *parent) :
             this, &SpriteEditorWindow::showPreview);
 
     connect(ui->nextFrameButton, &QPushButton::pressed,
-            this, &SpriteEditorWindow::incrementCurrentFrameIndex);
+            this, &SpriteEditorWindow::nextFrame);
     connect(ui->previousFrameButton, &QPushButton::pressed,
-            this, &SpriteEditorWindow::decrementCurrentFrameIndex);
+            this, &SpriteEditorWindow::previousFrame);
+
+
 
     sizeSelectionWindow* s = new sizeSelectionWindow(this, this);
     s->show();
@@ -75,9 +78,9 @@ void SpriteEditorWindow::decrementCurrentFrameIndex() {
     ui->currentFrameIndexDisplay->setText(QString::number(currentFrameIndex));
 }
 
-void SpriteEditorWindow::sliderChangeBrushSize()
+void SpriteEditorWindow::sliderChangeBrushSize(int value)
 {
-    int brushSizeValue = ui->brushSizeSlider->value();
+    int brushSizeValue = value;
     ui->canvasWidget->setPenWidth(brushSizeValue);
     ui->spinBox->setValue(brushSizeValue);
 }
@@ -161,6 +164,14 @@ void SpriteEditorWindow::addFrame() {
     QImage currentImage = ui->canvasWidget->getImage();
     model->saveFrame(currentFrameIndex, currentImage);
     model->addDuplicateFrame();
+    currentFrameIndex = model->getFrames().length()-1;
+    model->updateTimeline(ui->framesSelectorWidget);
+
+}
+
+void SpriteEditorWindow::addFirstFrame(){
+    QImage currentImage = ui->canvasWidget->getImage();
+    model->saveFrame(0, currentImage);
     model->updateTimeline(ui->framesSelectorWidget);
 }
 
@@ -194,6 +205,7 @@ void SpriteEditorWindow::nextFrame()
     QImage image = ui->canvasWidget->getImage();
     QImage newImage = model->nextFrame(ui->framesSelectorWidget, image, currentFrameIndex);
     ui->canvasWidget->setImage(newImage);
+    ui->currentFrameIndexDisplay->setText(QString::number(currentFrameIndex));
 }
 
 void SpriteEditorWindow::previousFrame()
@@ -201,6 +213,7 @@ void SpriteEditorWindow::previousFrame()
     QImage image = ui->canvasWidget->getImage();
     QImage newImage = model->previousFrame(ui->framesSelectorWidget, image, currentFrameIndex);
     ui->canvasWidget->setImage(newImage);
+    ui->currentFrameIndexDisplay->setText(QString::number(currentFrameIndex));
 }
 
 void SpriteEditorWindow::setDimensions(int dim) {
@@ -208,4 +221,5 @@ void SpriteEditorWindow::setDimensions(int dim) {
     model = new FramesModel(dimensions);
 
     ui->canvasWidget->setImageSize(dim);
+    addFirstFrame();
 }

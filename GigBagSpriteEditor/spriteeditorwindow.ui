@@ -205,7 +205,7 @@ color: rgb(0, 0, 0);</string>
       <x>670</x>
       <y>19</y>
       <width>120</width>
-      <height>551</height>
+      <height>611</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -277,7 +277,7 @@ color: rgb(0, 0, 0);</string>
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>460</y>
+       <y>550</y>
        <width>101</width>
        <height>41</height>
       </rect>
@@ -456,7 +456,7 @@ color: rgb(0, 0, 0);</string>
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>22</height>
+     <height>21</height>
     </rect>
    </property>
    <property name="styleSheet">

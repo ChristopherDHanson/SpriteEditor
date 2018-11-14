@@ -24,6 +24,7 @@ ScribbleArea::ScribbleArea(QWidget *parent) : QWidget(parent)
     mousePressed = false;
 }
 
+
 bool ScribbleArea::openImage(const QString &fileName)
 {
     QImage loadedImage;
@@ -135,6 +136,7 @@ void ScribbleArea::mouseReleaseEvent(QMouseEvent *event)
         drawingTools(normalizePos(event));
         scribbling = false;
     }
+
 
     update();
 }

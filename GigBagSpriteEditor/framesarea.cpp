@@ -49,7 +49,7 @@ framesarea::framesarea(QWidget *parent) : QWidget(parent)
 }
 
 void framesarea::clearFrames(){
-    for (int i = 0; i < buttonFrames->size(); i++){
+    for (int i = 0; i < buttonFrames->length(); i++){
         delete buttonFrames->at(i);
     }
     buttonFrames->clear();
@@ -58,7 +58,7 @@ void framesarea::clearFrames(){
 
 void framesarea::updateFramesArea(QVector<QImage> *frames){
     clearFrames();
-    for(int i = 0; i < frames->size(); i++) {
+    for(int i = 0; i < frames->length(); i++) {
         QImage img = frames->at(i);
         QPushButton *button = new QPushButton(QString::number(i+1));
         button->setFlat(true);
@@ -71,7 +71,7 @@ void framesarea::updateFramesArea(QVector<QImage> *frames){
         buttonFrames->append(button);
         vlayout->addWidget(button);
     }
-    if (buttonFrames->size() > 0){
+    if (buttonFrames->length() > 0){
         setSelectedFrameIndex(0);
     }
 
@@ -79,15 +79,16 @@ void framesarea::updateFramesArea(QVector<QImage> *frames){
 
 void framesarea::setSelectedFrameIndex(int frameIndex){
     //unselect all of them
-    for (int i = 0; i < buttonFrames->size(); i++){
+    for (int i = 0; i < buttonFrames->length(); i++){
         buttonFrames->at(i)->setStyleSheet("QPushButton {background-color: red; color: black;}");
+        buttonFrames->at(i)->setContentsMargins(0,0,0,0);
     }
     //select specific one
-    if (frameIndex >= 0 && frameIndex < buttonFrames->size()){
-        frameIndex = frameIndex % buttonFrames->size();
+    if (frameIndex >= 0 && frameIndex < buttonFrames->length()){
+        buttonFrames->at(frameIndex)->setStyleSheet("QPushButton {background-color: red; color: yellow;}");
+        buttonFrames->at(frameIndex)->setContentsMargins(15,0,0,0);
     }
 
-    buttonFrames->at(frameIndex)->setStyleSheet("QPushButton {background-color: red; color: yellow;}");
 }
 
 
