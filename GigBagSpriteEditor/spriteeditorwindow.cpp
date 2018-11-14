@@ -105,7 +105,12 @@ void SpriteEditorWindow::newFile() {
 }
 void SpriteEditorWindow::openFile() {
     std::cout << "open file\n";
-    model->openSSP("test.ssp");
+
+    QString fileName = QFileDialog::getOpenFileName(this,
+       tr("Open SSP File"), "",
+       tr("Address Book (*.abk);;All Files (*)"));
+
+    model->openSSP(fileName);
 }
 void SpriteEditorWindow::saveFile() {
     std::cout << "save file\n";
