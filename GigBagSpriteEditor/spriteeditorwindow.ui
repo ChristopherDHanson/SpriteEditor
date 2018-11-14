@@ -468,6 +468,7 @@ color: rgb(255, 255, 255);</string>
      <string>File</string>
     </property>
     <addaction name="actionNew"/>
+    <addaction name="actionOpen"/>
     <addaction name="actionSave"/>
     <addaction name="actionSave_As"/>
    </widget>
