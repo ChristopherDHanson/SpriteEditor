@@ -164,13 +164,10 @@
         <height>21</height>
        </rect>
       </property>
-<<<<<<< HEAD
       <property name="styleSheet">
        <string notr="true">background-color: rgb(255, 255, 255);
 color: rgb(0, 0, 0);</string>
       </property>
-=======
->>>>>>> 13bb58cc8d9d9cdaeb4d4b490bac1d2ade372966
       <property name="minimum">
        <number>1</number>
       </property>
