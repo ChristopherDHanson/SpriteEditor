@@ -83,7 +83,7 @@ void FramesModel::saveAsSSP(std::string fileName) {
           for ( int row = 0; row < frame.height(); ++row ) {
               for ( int col = 0; col < frame.width(); ++col )
               {
-                  QColor clrCurrent( frame.pixel( row, col ) );
+                  QColor clrCurrent( frame.pixel( col, row ) );
 
                   outfile
                             << clrCurrent.red() << " "

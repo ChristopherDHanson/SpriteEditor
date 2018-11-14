@@ -138,6 +138,7 @@ void SpriteEditorWindow::addFrame() {
     model->saveFrame(currentFrameIndex, currentImage);
     model->addDuplicateFrame();
 }
+
 void SpriteEditorWindow::deleteFrame() {
    model->deleteFrame(currentFrameIndex);
 }

@@ -17,11 +17,11 @@ public:
     explicit SpriteEditorWindow(QWidget *parent = nullptr);
     ~SpriteEditorWindow();
     void setDimensions(int dim);
+    int currentFrameIndex;
 
 private:
     Ui::SpriteEditorWindow *ui;
     FramesModel* model;
-    int currentFrameIndex;
     int dimensions;
 
 private slots:
