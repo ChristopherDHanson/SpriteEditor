@@ -138,6 +138,7 @@ void SpriteEditorWindow::showColorPalette()
         palette.setColor(ui->colorPaletteButton->foregroundRole(), color);
         ui->colorPaletteButton->setAutoFillBackground(true);
         ui->colorPaletteButton->setPalette(palette);
-        //TODO: Method to send in the QColor value.
+        ui->canvasWidget->setPenColor(color);
+
     }
 }
