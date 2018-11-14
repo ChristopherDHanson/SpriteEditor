@@ -11,7 +11,6 @@ SpriteEditorWindow::SpriteEditorWindow(QWidget *parent) :
 
     connect(ui->brushSizeSlider, SIGNAL(sliderReleased()), this, SLOT(sliderChangeBrushSize()));
     connect(ui->brushSizeSlider, SIGNAL(valueChanged()), this, SLOT(sliderChangeBrushSize()));
-
     connect(ui->spinBox, SIGNAL(valueChanged(int)), this, SLOT(spinBoxChangeBrushSize()));
     connect(ui->dotBrushButton, SIGNAL(released()), this, SLOT(pencilDraw()));
     connect(ui->lineBrushButton, SIGNAL(released()), this, SLOT(lineDraw()));
