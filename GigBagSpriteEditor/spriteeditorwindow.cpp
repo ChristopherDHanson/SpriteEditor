@@ -1,5 +1,6 @@
 #include "spriteeditorwindow.h"
 #include "ui_spriteeditorwindow.h"
+#include "sizeselectionwindow.h"
 #include "scribblearea.h"
 #include "framesarea.h"
 #include "QColorDialog"
@@ -11,7 +12,6 @@ SpriteEditorWindow::SpriteEditorWindow(QWidget *parent) :
     currentFrameIndex = 0;
     ui->setupUi(this);
 
-    connect(ui->brushSizeSlider, SIGNAL(sliderReleased()), this, SLOT(sliderChangeBrushSize()));
     connect(ui->brushSizeSlider, SIGNAL(valueChanged()), this, SLOT(sliderChangeBrushSize()));
     connect(ui->spinBox, SIGNAL(valueChanged(int)), this, SLOT(spinBoxChangeBrushSize()));
     connect(ui->dotBrushButton, SIGNAL(released()), this, SLOT(pencilDraw()));
@@ -37,9 +37,11 @@ SpriteEditorWindow::SpriteEditorWindow(QWidget *parent) :
             this, &SpriteEditorWindow::deleteFrame);
     connect(ui->showPreviewButton, &QPushButton::pressed,
             this, &SpriteEditorWindow::showPreview);
-    connect(ui->colorPaletteButton, &QPushButton::pressed,
-            this, &SpriteEditorWindow::showColorPalette);
 
+    sizeSelectionWindow* s = new sizeSelectionWindow(this, this);
+    s->show();
+    s->raise();
+    s->activateWindow();
 }
 
 SpriteEditorWindow::~SpriteEditorWindow()
@@ -94,51 +96,62 @@ void SpriteEditorWindow::clearCanvas()
 
 void SpriteEditorWindow::newFile() {
     std::cout << "new file\n";
-    model.newProject();
+    sizeSelectionWindow* s = new sizeSelectionWindow(this, this);
+    s->show();
+    s->raise();
+    s->activateWindow();
+    model->newProject();
 }
 void SpriteEditorWindow::openFile() {
     std::cout << "open file\n";
-    model.openSSP("test.ssp");
+    model->openSSP("test.ssp");
 }
 void SpriteEditorWindow::saveFile() {
     std::cout << "save file\n";
     QImage currentImage = ui->canvasWidget->getImage();
-    model.saveFrame(currentFrameIndex, currentImage);
-    model.saveAsSSP("testSaveFile");
+    model->saveFrame(currentFrameIndex, currentImage);
+    model->saveAsSSP("testSaveFile");
 }
 
 void SpriteEditorWindow::saveAsFile() {
     std::cout << "save as file\n" ;
     QImage currentImage = ui->canvasWidget->getImage();
-    model.saveFrame(currentFrameIndex, currentImage);
-    model.saveAsGIF("testGIFSaveFile.gif");
+    model->saveFrame(currentFrameIndex, currentImage);
+    model->saveAsGIF("testGIFSaveFile.gif");
 }
 
 void SpriteEditorWindow::addFrame() {
     std::cout << "add frame\n";
-    model.addDuplicateFrame();
+    model->addDuplicateFrame();
 }
 void SpriteEditorWindow::deleteFrame() {
    std::cout << "delete frame\n";
-   model.deleteFrame(currentFrameIndex);
+   model->deleteFrame(currentFrameIndex);
 }
 
 void SpriteEditorWindow::showPreview()
 {
     std::cout << "show preview\n";
-    model.showPreview();
+    model->showPreview();
 }
 
-void SpriteEditorWindow::showColorPalette()
+void SpriteEditorWindow::on_colorPaletteButton_clicked()
 {
     QColor color = QColorDialog::getColor(Qt::white, this, "Select Color");
-    if (color.isValid()){
+    if (color.isValid())
+    {
         QPalette palette = ui->colorPaletteButton->palette();
         palette.setColor(ui->colorPaletteButton->backgroundRole(), color);
         palette.setColor(ui->colorPaletteButton->foregroundRole(), color);
         ui->colorPaletteButton->setAutoFillBackground(true);
         ui->colorPaletteButton->setPalette(palette);
         ui->canvasWidget->setPenColor(color);
-
     }
+}
+
+void SpriteEditorWindow::setDimensions(int dim) {
+    dimensions = dim;
+    model = new FramesModel(dimensions);
+
+    ui->canvasWidget->setImageSize(dim);
 }

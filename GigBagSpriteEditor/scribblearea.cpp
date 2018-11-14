@@ -7,6 +7,7 @@
 #endif
 #endif
 
+#include "iostream"
 #include "scribblearea.h"
 
 ScribbleArea::ScribbleArea(QWidget *parent) : QWidget(parent)
@@ -17,7 +18,8 @@ ScribbleArea::ScribbleArea(QWidget *parent) : QWidget(parent)
     myPenWidth = 1;
     myPenColor = Qt::black;
     drawTool = 0;
-    image = QImage(64, 64, QImage::Format_RGB32);
+    imageSize = 64.0;
+    image = QImage(imageSize, imageSize, QImage::Format_RGB32);
     image.fill(Qt::white);
     mousePressed = false;
 }
@@ -53,8 +55,13 @@ bool ScribbleArea::saveImage(const QString &fileName, const char *fileFormat)
 QImage ScribbleArea::getImage()
 {
     QImage visibleImage = image;
-    resizeImage(&visibleImage, size());
     return visibleImage;
+}
+
+void ScribbleArea::setImage(QImage newImage)
+{
+    image = newImage;
+    update();
 }
 
 void ScribbleArea::setPenColor(const QColor &newColor)
@@ -171,17 +178,6 @@ void ScribbleArea::paintEvent(QPaintEvent *event)
     }
 
     painter.end();
-}
-
-void ScribbleArea::resizeEvent(QResizeEvent *event)
-{
-//    if (width() > image.width() || height() > image.height()) {
-//        int newWidth = qMax(width() + 128, image.width());
-//        int newHeight = qMax(height() + 128, image.height());
-//        resizeImage(&image, QSize(newWidth, newHeight));
-//        update();
-//    }
-//    QWidget::resizeEvent(event);
 }
 
 // assigns tool choice int for corresponding tool function for switch
@@ -306,7 +302,14 @@ void ScribbleArea::print()
 
 QPoint ScribbleArea::normalizePos(QMouseEvent *event) {
     QPoint toReturn;
-    toReturn.setX(qRound(64.0 * (event->pos().x()) / 512.0) );
-    toReturn.setY(qRound(64.0 * (event->pos().y()) / 512.0) );
+    toReturn.setX(qRound(imageSize * (event->pos().x()) / 512.0) );
+    toReturn.setY(qRound(imageSize * (event->pos().y()) / 512.0) );
     return toReturn;
+}
+
+void ScribbleArea::setImageSize(int size)
+{
+    imageSize = (double)size;
+    image = QImage(size, size,  QImage::Format_RGB32);
+    image.fill(Qt::white);
 }

@@ -11,7 +11,7 @@ private:
   int height, width;
 public:
   FramesModel();
-  FramesModel(int width, int height);
+  FramesModel(int dimensions);
   ~FramesModel();
   FramesModel(const FramesModel& other);
   FramesModel& operator=(FramesModel framesToCopy);

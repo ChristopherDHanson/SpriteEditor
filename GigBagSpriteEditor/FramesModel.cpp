@@ -9,6 +9,11 @@ FramesModel::FramesModel()
     height = 0;
     width = 0;
 }
+FramesModel::FramesModel(int dimensions)
+{
+    height = dimensions;
+    width = dimensions;
+}
 FramesModel::~FramesModel()
 {
 
@@ -75,8 +80,8 @@ void FramesModel::saveAsSSP(std::string fileName) {
       outfile << frames.length() << "\n";
       // Output data
       for (QImage frame : frames) {
-          for ( int row = 1; row < frame.height(); ++row ) {
-              for ( int col = 1; col < frame.width(); ++col )
+          for ( int row = 0; row < frame.height(); ++row ) {
+              for ( int col = 0; col < frame.width(); ++col )
               {
                   QColor clrCurrent( frame.pixel( row, col ) );
 
