@@ -205,7 +205,7 @@ color: rgb(0, 0, 0);</string>
       <x>670</x>
       <y>19</y>
       <width>120</width>
-      <height>511</height>
+      <height>551</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -284,6 +284,32 @@ color: rgb(0, 0, 0);</string>
      </property>
      <property name="text">
       <string>▼</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>520</y>
+       <width>67</width>
+       <height>17</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Frame:</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="currentFrameIndexDisplay">
+     <property name="geometry">
+      <rect>
+       <x>50</x>
+       <y>520</y>
+       <width>67</width>
+       <height>17</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>0</string>
      </property>
     </widget>
    </widget>
@@ -430,7 +456,7 @@ color: rgb(0, 0, 0);</string>
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>20</height>
+     <height>22</height>
     </rect>
    </property>
    <property name="styleSheet">

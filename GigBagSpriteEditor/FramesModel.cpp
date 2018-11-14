@@ -6,8 +6,7 @@
 
 FramesModel::FramesModel()
 {
-    height = 0;
-    width = 0;
+
 }
 FramesModel::FramesModel(int dimensions)
 {
@@ -53,6 +52,7 @@ void FramesModel::deleteFrame(int index) {
     }
 }
 
+<<<<<<< HEAD
 QImage FramesModel::nextFrame(framesarea *fa, QImage image, int &currentFrameIndex){
     saveFrame(currentFrameIndex, image);
     currentFrameIndex = (currentFrameIndex + 1) % frames.length();
@@ -74,6 +74,8 @@ void FramesModel::updateTimeline(framesarea *fa)
     fa->updateFramesArea(&frames);
 }
 
+=======
+>>>>>>> ac963098479f06777a02a5bc43dbf6e4cf94fcd8
 void FramesModel::showPreview()
 {
     PreviewWindow *w = new PreviewWindow(frames);
@@ -108,7 +110,7 @@ void FramesModel::saveAsSSP(std::string fileName) {
           for ( int row = 0; row < frame.height(); ++row ) {
               for ( int col = 0; col < frame.width(); ++col )
               {
-                  QColor clrCurrent( frame.pixel( row, col ) );
+                  QColor clrCurrent( frame.pixel( col, row ) );
 
                   outfile
                             << clrCurrent.red() << " "
