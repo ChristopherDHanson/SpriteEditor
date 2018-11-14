@@ -52,6 +52,7 @@ void SpriteEditorWindow::sliderChangeBrushSize()
 
 void SpriteEditorWindow::spinBoxChangeBrushSize()
 {
+
     int brushSizeValue = ui->spinBox->value();
     ui->canvasWidget->setPenWidth(brushSizeValue);
     ui->brushSizeSlider->setSliderPosition(brushSizeValue);
@@ -135,5 +136,9 @@ void SpriteEditorWindow::on_colorPaletteButton_clicked()
         ui->colorPaletteButton->setAutoFillBackground(true);
         ui->colorPaletteButton->setPalette(palette);
         ui->canvasWidget->setPenColor(color);
+<<<<<<< HEAD
+=======
+
+>>>>>>> 22876d0a530c680774e482f593d50d33bc4c2b0f
     }
 }
