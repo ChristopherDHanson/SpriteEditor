@@ -1,6 +1,11 @@
 #include "FramesModel.h"
 #include "gif.h"
+<<<<<<< HEAD
 #include <qbuffer.h>
+=======
+#include "previewwindow.h"
+#include "iostream"
+>>>>>>> frameSelector
 
 FramesModel::FramesModel()
 {
@@ -31,6 +36,7 @@ void FramesModel::addDuplicateFrame() {
     }
     frames.push_back(temp);
 }
+<<<<<<< HEAD
 void FramesModel::addNewFrame() {
     QImage temp;
     if (frames.length() > 0) {
@@ -38,10 +44,20 @@ void FramesModel::addNewFrame() {
     }
     frames.push_back(temp);
 }
+=======
+
+>>>>>>> frameSelector
 void FramesModel::deleteFrame(int index) {
     if (index >= 0 && index < frames.length() - 1) {
         frames.remove(index);
     }
+}
+
+void FramesModel::showPreview()
+{
+    PreviewWindow *w = new PreviewWindow(frames);
+    w->show();
+
 }
 void FramesModel::saveFrame(int frameIndex, QImage frame) {
     if (frameIndex < frames.size())
@@ -66,8 +82,8 @@ void FramesModel::saveAsSSP(std::string fileName) {
       outfile << frames.length() << "\n";
       // Output data
       for (QImage frame : frames) {
-          for ( int row = 1; row < frame.height() - 1; ++row ) {
-              for ( int col = 1; col < frame.width() - 1; ++col )
+          for ( int row = 1; row < frame.height(); ++row ) {
+              for ( int col = 1; col < frame.width(); ++col )
               {
                   QColor clrCurrent( frame.pixel( row, col ) );
 
@@ -88,25 +104,20 @@ void FramesModel::saveAsGIF(std::string filePath)
     GifWriter newGifFile;
 
     //initialize writer
-    GifBegin(&newGifFile, filePath.c_str(), width, height, 10);
+    GifBegin(&newGifFile, filePath.c_str(), frames[0].width(), frames[0].height(), 10);
 
     //take each current frame and write it
     for (size_t i = 0; i < frames.length(); i++)
     {
       QImage original = frames[i].convertToFormat(QImage::Format_RGBA8888);
-      GifWriteFrame(&newGifFile, original.bits(), width, height, 10, 8, false);
+      GifWriteFrame(&newGifFile, original.bits(), frames[i].width(), frames[i].height(), 10, 8, false);
     }
 
     //complete EOF code
     GifEnd(&newGifFile);
-
-    //safe file to stream
-    std::ofstream outfile (filePath + ".gif");
-    outfile << newGifFile.f;
-    outfile.close();
 }
 
-QVector<QImage> FramesModel::openSSP(std::string filepath) {
+void FramesModel::openSSP(std::string filepath) {
     std::string currentLine;
     std::ifstream fileToOpen (filepath);
 
