@@ -10,22 +10,17 @@ SpriteEditorWindow::SpriteEditorWindow(QWidget *parent) :
     ui->setupUi(this);
 
     connect(ui->brushSizeSlider, SIGNAL(sliderReleased()), this, SLOT(sliderChangeBrushSize()));
-<<<<<<< HEAD
     connect(ui->brushSizeSlider, SIGNAL(valueChanged()), this, SLOT(sliderChangeBrushSize()));
-=======
->>>>>>> 13bb58cc8d9d9cdaeb4d4b490bac1d2ade372966
+
     connect(ui->spinBox, SIGNAL(valueChanged(int)), this, SLOT(spinBoxChangeBrushSize()));
     connect(ui->dotBrushButton, SIGNAL(released()), this, SLOT(pencilDraw()));
     connect(ui->lineBrushButton, SIGNAL(released()), this, SLOT(lineDraw()));
     connect(ui->eraserButton, SIGNAL(released()), this, SLOT(eraser()));
     connect(ui->rectangleBrushButton, SIGNAL(released()), this, SLOT(rectDraw()));
     connect(ui->circleBrushButton, SIGNAL(released()), this, SLOT(circleDraw()));
-<<<<<<< HEAD
     connect(ui->clearFrameButton, SIGNAL(released()), this, SLOT(clearCanvas()));
 
     // connect(ui->lineBrushButton, &QPushButton::pressed, this, &SpriteEditorWindow::drawLine);
-=======
->>>>>>> 13bb58cc8d9d9cdaeb4d4b490bac1d2ade372966
 
     connect(ui->actionNew, &QAction::triggered,
             this, &SpriteEditorWindow::newFile);
@@ -35,7 +30,6 @@ SpriteEditorWindow::SpriteEditorWindow(QWidget *parent) :
             this, &SpriteEditorWindow::saveFile);
     connect(ui->actionSave_As, &QAction::triggered,
             this, &SpriteEditorWindow::saveAsFile);
-
     connect(ui->addFrameButton, &QPushButton::pressed,
             this, &SpriteEditorWindow::addFrame);
     connect(ui->deleteFrameButton, &QPushButton::pressed,
@@ -68,7 +62,6 @@ void SpriteEditorWindow::pencilDraw()
 }
 
 void SpriteEditorWindow::lineDraw()
-<<<<<<< HEAD
 {
     ui->canvasWidget->toolChooserHelper(1);
 }
@@ -91,7 +84,6 @@ void SpriteEditorWindow::circleDraw()
 void SpriteEditorWindow::clearCanvas()
 {
     ui->canvasWidget->clearImage();
-=======
 {
     ui->canvasWidget->toolChooserHelper(1);
 }
@@ -109,7 +101,6 @@ void SpriteEditorWindow::rectDraw()
 void SpriteEditorWindow::circleDraw()
 {
     ui->canvasWidget->toolChooserHelper(4);
->>>>>>> 13bb58cc8d9d9cdaeb4d4b490bac1d2ade372966
 }
 
 void SpriteEditorWindow::newFile() {
