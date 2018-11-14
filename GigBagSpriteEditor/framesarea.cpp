@@ -65,7 +65,7 @@ void framesarea::updateFramesArea(QVector<QImage> *frames){
         button->setAutoFillBackground(true);
         button->setContentsMargins(0,0,0,0);
         button->setStyleSheet("background-color: red");
-        button->setFixedSize(70, 70);
+        button->setFixedSize(80, 80);
         button->setIcon(QIcon(QPixmap::fromImage(img)));
         button->setIconSize(img.size());
         buttonFrames->append(button);
@@ -80,13 +80,13 @@ void framesarea::updateFramesArea(QVector<QImage> *frames){
 void framesarea::setSelectedFrameIndex(int frameIndex){
     //unselect all of them
     for (int i = 0; i < buttonFrames->length(); i++){
-        buttonFrames->at(i)->setStyleSheet("QPushButton {background-color: red; color: black;}");
-        buttonFrames->at(i)->setContentsMargins(0,0,0,0);
+        buttonFrames->at(i)->setStyleSheet("QPushButton {background-color: red; color: white;}");
+        //buttonFrames->at(i)->setFixedSize(70, 70);
     }
     //select specific one
     if (frameIndex >= 0 && frameIndex < buttonFrames->length()){
-        buttonFrames->at(frameIndex)->setStyleSheet("QPushButton {background-color: red; color: yellow;}");
-        buttonFrames->at(frameIndex)->setContentsMargins(15,0,0,0);
+        buttonFrames->at(frameIndex)->setStyleSheet("QPushButton {background-color: red; color: red;}");
+        //buttonFrames->at(frameIndex)->setFixedSize(80, 80);
     }
 
 }

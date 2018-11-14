@@ -140,6 +140,7 @@ void SpriteEditorWindow::openFile() {
     model->openSSP(fileName.toUtf8().constData());
     model->updateTimeline(ui->framesSelectorWidget);
     ui->canvasWidget->setImage(model->getFrames().at(0));
+     ui->framesSelectorWidget->setSelectedFrameIndex(currentFrameIndex);
 }
 void SpriteEditorWindow::saveFile() {
     QImage currentImage = ui->canvasWidget->getImage();
@@ -168,7 +169,7 @@ void SpriteEditorWindow::addFrame() {
     model->addDuplicateFrame();
     currentFrameIndex = model->getFrames().length()-1;
     model->updateTimeline(ui->framesSelectorWidget);
-
+     ui->framesSelectorWidget->setSelectedFrameIndex(currentFrameIndex);
 }
 
 void SpriteEditorWindow::addFirstFrame(){
@@ -180,6 +181,7 @@ void SpriteEditorWindow::addFirstFrame(){
 void SpriteEditorWindow::deleteFrame() {
    model->deleteFrame(currentFrameIndex);
    model->updateTimeline(ui->framesSelectorWidget);
+   ui->framesSelectorWidget->setSelectedFrameIndex(currentFrameIndex);
 }
 
 void SpriteEditorWindow::showPreview()
@@ -221,7 +223,7 @@ void SpriteEditorWindow::previousFrame()
 void SpriteEditorWindow::setDimensions(int dim) {
     dimensions = dim;
     model = new FramesModel(dimensions);
-    ui->canvasWidget->init(&currentFrameIndex, ui->framesSelectorWidget, model);
+    ui->canvasWidget->init(currentFrameIndex, ui->framesSelectorWidget, model);
     ui->canvasWidget->setImageSize(dim);
     addFirstFrame();
 }

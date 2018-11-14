@@ -52,8 +52,9 @@ void FramesModel::deleteFrame(int &currentFrameIndex) {
         return;
     if (currentFrameIndex >= 0 && currentFrameIndex < frames.length()) {
         frames.remove(currentFrameIndex);
-        if (currentFrameIndex == frames.length())
+        if (currentFrameIndex == frames.length() + 1){
             currentFrameIndex = frames.length() - 1;
+        }
     }
 }
 
@@ -62,8 +63,8 @@ QImage FramesModel::nextFrame(framesarea *fa, QImage image, int &currentFrameInd
     saveFrame(currentFrameIndex, image);
     currentFrameIndex = (currentFrameIndex + 1) % frames.length();
     qDebug() << "newIndex:" << currentFrameIndex << "  frames.length:" << frames.length();
-    fa->setSelectedFrameIndex(currentFrameIndex);
     fa->updateFramesArea(&frames);
+    fa->setSelectedFrameIndex(currentFrameIndex);
     return frames[currentFrameIndex];
 }
 
@@ -73,8 +74,8 @@ QImage FramesModel::previousFrame(framesarea *fa,QImage image, int &currentFrame
     currentFrameIndex = currentFrameIndex - 1;
     if (currentFrameIndex < 0) currentFrameIndex = frames.length() - 1;
     qDebug() << "newIndex:" << currentFrameIndex << "  frames.length:" << frames.length();
-    fa->setSelectedFrameIndex(currentFrameIndex);
     fa->updateFramesArea(&frames);
+    fa->setSelectedFrameIndex(currentFrameIndex);
     return frames[currentFrameIndex];
 }
 

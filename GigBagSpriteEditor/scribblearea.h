@@ -25,7 +25,7 @@ public:
         void setImageSize(int size);
         void setImage(QImage newImage);
         QImage getImage();
-        void init(int *_currentFrameIndex, framesarea *_framesArea, FramesModel *_model);
+        void init(int &_currentFrameIndex, framesarea *_framesArea, FramesModel *_model);
 private:
         int *currentFrameIndex;
         framesarea *framesArea;
