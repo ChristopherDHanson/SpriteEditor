@@ -20,6 +20,8 @@ ScribbleArea::ScribbleArea(QWidget *parent) : QWidget(parent)
     myPenWidth = 1;
     myPenColor = Qt::black;
     drawTool = 0;
+    image = QImage(64, 64, QImage::Format_RGB32);
+    image.fill(Qt::white);
 }
 
 bool ScribbleArea::openImage(const QString &fileName)
@@ -78,7 +80,8 @@ void ScribbleArea::mousePressEvent(QMouseEvent *event)
 {
     if (event->button() == Qt::LeftButton)
     {
-        lastPoint = event->pos();
+        //lastPoint = event->pos();
+        lastPoint = normalizePos(event);
         scribbling = true;
     }
 }
@@ -86,17 +89,17 @@ void ScribbleArea::mousePressEvent(QMouseEvent *event)
 void ScribbleArea::mouseMoveEvent(QMouseEvent *event)
 {
     if ((event->buttons() & Qt::LeftButton) && scribbling && drawTool == 0)
-        pencilTool(event->pos());
+        pencilTool(normalizePos(event));
 
     else if ((event->buttons() & Qt::LeftButton) && scribbling && drawTool == 2)
-        eraserTool(event->pos());
+        eraserTool(normalizePos(event));
 }
 
 void ScribbleArea::mouseReleaseEvent(QMouseEvent *event)
 {
     if (event->button() == Qt::LeftButton && scribbling)
     {
-        drawingTools(event->pos());
+        drawingTools(normalizePos(event));
         scribbling = false;
     }
 }
@@ -105,18 +108,34 @@ void ScribbleArea::paintEvent(QPaintEvent *event)
 {
     QPainter painter(this);
     QRect dirtyRect = event->rect();
-    painter.drawImage(dirtyRect, image, dirtyRect);
+
+    QPixmap tempPix;
+    Qt::ImageConversionFlag flags=Qt::AutoColor;
+    tempPix.convertFromImage(image, flags);
+
+    //QSize sizeSmall = QSize(64,64);
+    QSize sizeLarge = QSize(512, 512);
+    //tempPix = tempPix.scaled(sizeSmall);
+    tempPix = tempPix.scaled(sizeLarge);
+
+    QImage tempImage;
+    tempImage = tempPix.toImage();
+
+
+    //painter.drawPixmap(dirtyRect, tempPix, dirtyRect);
+    painter.drawImage(dirtyRect, tempImage, dirtyRect);
+    update();
 }
 
 void ScribbleArea::resizeEvent(QResizeEvent *event)
 {
-    if (width() > image.width() || height() > image.height()) {
-        int newWidth = qMax(width() + 128, image.width());
-        int newHeight = qMax(height() + 128, image.height());
-        resizeImage(&image, QSize(newWidth, newHeight));
-        update();
-    }
-    QWidget::resizeEvent(event);
+//    if (width() > image.width() || height() > image.height()) {
+//        int newWidth = qMax(width() + 128, image.width());
+//        int newHeight = qMax(height() + 128, image.height());
+//        resizeImage(&image, QSize(newWidth, newHeight));
+//        update();
+//    }
+//    QWidget::resizeEvent(event);
 }
 
 // assigns tool choice int for corresponding tool function for switch
@@ -237,4 +256,11 @@ void ScribbleArea::print()
 //        painter.drawImage(0, 0, image);
 //    }
 //#endif // QT_CONFIG(printdialog)
+}
+
+QPoint ScribbleArea::normalizePos(QMouseEvent *event) {
+    QPoint toReturn;
+    toReturn.setX(qRound(64.0 * (event->pos().x()) / 512.0) );
+    toReturn.setY(qRound(64.0 * (event->pos().y()) / 512.0) );
+    return toReturn;
 }

@@ -46,6 +46,7 @@ private:
         void ellipseTool(const QPoint &endPoint);
         void eraserTool(const QPoint &endPoint);
         void resizeImage(QImage *image, const QSize &newSize);
+        QPoint normalizePos(QMouseEvent *event);
 
         bool modified;
         bool scribbling;
