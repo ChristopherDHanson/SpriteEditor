@@ -12,7 +12,7 @@ framesarea::framesarea(QWidget *parent) : QWidget(parent)
     //Assumes dimension will be 100 x 290
     this->setFixedSize(100, 290);
     this->setContentsMargins(0,0,0,0);
-    this->setStyleSheet("background-color: blue");
+    this->setStyleSheet("background-color: gray");
     // set scroll area
     QScrollArea *scrollArea = new QScrollArea(this);
     scrollArea->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
@@ -65,9 +65,9 @@ void framesarea::updateFramesArea(QVector<QImage> *frames){
         button->setAutoFillBackground(true);
         button->setContentsMargins(0,0,0,0);
         button->setStyleSheet("background-color: red");
-        button->setFixedSize(80, 80);
-        button->setIcon(QIcon(QPixmap::fromImage(img)));
-        button->setIconSize(img.size());
+        button->setFixedSize(70, 70);
+        button->setIcon(QIcon(QPixmap::fromImage(img).scaled(50, 50, Qt::IgnoreAspectRatio)));
+        button->setIconSize(QSize(50,50));
         buttonFrames->append(button);
         vlayout->addWidget(button);
     }
@@ -80,12 +80,12 @@ void framesarea::updateFramesArea(QVector<QImage> *frames){
 void framesarea::setSelectedFrameIndex(int frameIndex){
     //unselect all of them
     for (int i = 0; i < buttonFrames->length(); i++){
-        buttonFrames->at(i)->setStyleSheet("QPushButton {background-color: red; color: white;}");
+        buttonFrames->at(i)->setStyleSheet("QPushButton {color: white;}");
         //buttonFrames->at(i)->setFixedSize(70, 70);
     }
     //select specific one
     if (frameIndex >= 0 && frameIndex < buttonFrames->length()){
-        buttonFrames->at(frameIndex)->setStyleSheet("QPushButton {background-color: red; color: red;}");
+        buttonFrames->at(frameIndex)->setStyleSheet("QPushButton {color: red;}");
         //buttonFrames->at(frameIndex)->setFixedSize(80, 80);
     }
 
