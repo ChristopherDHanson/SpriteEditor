@@ -51,10 +51,6 @@ void FramesModel::deleteFrame(int index) {
     }
 }
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 3ca60282f525130df5c1b214ce0fbcb96338dcd6
 void FramesModel::showPreview()
 {
     PreviewWindow *w = new PreviewWindow(frames);

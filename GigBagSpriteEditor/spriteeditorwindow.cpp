@@ -110,11 +110,7 @@ void SpriteEditorWindow::openFile() {
        tr("Open SSP File"), "",
        tr("SSP (*.ssp)"));
 
-<<<<<<< HEAD
-    model->openSSP(fileName.toStdString());
-=======
     model->openSSP(fileName.toUtf8().constData());
->>>>>>> 3ca60282f525130df5c1b214ce0fbcb96338dcd6
 }
 void SpriteEditorWindow::saveFile() {
     QImage currentImage = ui->canvasWidget->getImage();
