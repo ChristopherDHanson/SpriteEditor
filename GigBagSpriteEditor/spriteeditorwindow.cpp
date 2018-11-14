@@ -221,7 +221,7 @@ void SpriteEditorWindow::previousFrame()
 void SpriteEditorWindow::setDimensions(int dim) {
     dimensions = dim;
     model = new FramesModel(dimensions);
-
+    ui->canvasWidget->init(&currentFrameIndex, ui->framesSelectorWidget, model);
     ui->canvasWidget->setImageSize(dim);
     addFirstFrame();
 }

@@ -9,6 +9,9 @@
 
 #include "iostream"
 #include "scribblearea.h"
+#include "framesarea.h"
+#include "FramesModel.h"
+#include <QDebug>
 
 ScribbleArea::ScribbleArea(QWidget *parent) : QWidget(parent)
 {
@@ -137,8 +140,16 @@ void ScribbleArea::mouseReleaseEvent(QMouseEvent *event)
         scribbling = false;
     }
 
-
     update();
+    //qDebug() << "current frame index on mouse release:" << *currentFrameIndex;
+    model->saveFrame(*currentFrameIndex, getImage());
+    model->updateTimeline(framesArea);
+}
+
+void ScribbleArea::init(int *_currentFrameIndex, framesarea *_framesArea, FramesModel *_model){
+    currentFrameIndex = _currentFrameIndex;
+    framesArea = _framesArea;
+    model = _model;
 }
 
 void ScribbleArea::paintEvent(QPaintEvent *event)

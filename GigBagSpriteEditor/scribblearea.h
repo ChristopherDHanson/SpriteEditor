@@ -6,6 +6,9 @@
 #include <QPoint>
 #include <QObject>
 #include <QWidget>
+#include <QVector>
+#include "framesarea.h"
+#include "FramesModel.h"
 
 class ScribbleArea : public QWidget
 {
@@ -22,7 +25,11 @@ public:
         void setImageSize(int size);
         void setImage(QImage newImage);
         QImage getImage();
+        void init(int *_currentFrameIndex, framesarea *_framesArea, FramesModel *_model);
 private:
+        int *currentFrameIndex;
+        framesarea *framesArea;
+        FramesModel *model;
         bool openImage(const QString &fileName);
         bool saveImage(const QString &fileName, const char *fileFormat);
         bool isModified() const { return modified; }
