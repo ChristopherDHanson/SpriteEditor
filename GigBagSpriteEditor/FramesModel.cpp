@@ -3,6 +3,7 @@
 #include <qbuffer.h>
 #include "previewwindow.h"
 #include "iostream"
+#include <QDebug>
 
 FramesModel::FramesModel()
 {
@@ -51,11 +52,14 @@ void FramesModel::deleteFrame(int index) {
     }
 }
 
+<<<<<<< HEAD
 void FramesModel::showPreview()
 {
     PreviewWindow *w = new PreviewWindow(frames);
     w->show();
 }
+=======
+>>>>>>> 19e32db47b19cc88f54134d4d465a5db5ac83024
 void FramesModel::saveFrame(int frameIndex, QImage frame) {
     if (frameIndex < frames.size())
         frames[frameIndex] = QImage(frame);

@@ -10,7 +10,7 @@
     <x>0</x>
     <y>0</y>
     <width>800</width>
-    <height>600</height>
+    <height>700</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -250,19 +250,6 @@ color: rgb(0, 0, 0);</string>
       <string>▲</string>
      </property>
     </widget>
-    <widget class="QPushButton" name="nextFrameButton">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>460</y>
-       <width>101</width>
-       <height>41</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>▼</string>
-     </property>
-    </widget>
     <widget class="framesarea" name="framesSelectorWidget" native="true">
      <property name="geometry">
       <rect>
@@ -284,6 +271,19 @@ color: rgb(0, 0, 0);</string>
      </property>
      <property name="text">
       <string>Show Preview</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="nextFrameButton">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>460</y>
+       <width>101</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>▼</string>
      </property>
     </widget>
    </widget>
@@ -430,7 +430,7 @@ color: rgb(0, 0, 0);</string>
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>22</height>
+     <height>20</height>
     </rect>
    </property>
    <property name="styleSheet">
