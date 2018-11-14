@@ -38,7 +38,7 @@ private slots:
     void addFrame();
     void deleteFrame();
     void showPreview();
-    void showColorPalette();
+    void on_colorPaletteButton_clicked();
 };
 
 #endif // SPRITEEDITORWINDOW_H

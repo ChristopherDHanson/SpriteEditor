@@ -11,7 +11,6 @@ SpriteEditorWindow::SpriteEditorWindow(QWidget *parent) :
     currentFrameIndex = 0;
     ui->setupUi(this);
 
-    connect(ui->brushSizeSlider, SIGNAL(sliderReleased()), this, SLOT(sliderChangeBrushSize()));
     connect(ui->brushSizeSlider, SIGNAL(valueChanged()), this, SLOT(sliderChangeBrushSize()));
     connect(ui->spinBox, SIGNAL(valueChanged(int)), this, SLOT(spinBoxChangeBrushSize()));
     connect(ui->dotBrushButton, SIGNAL(released()), this, SLOT(pencilDraw()));
@@ -37,9 +36,6 @@ SpriteEditorWindow::SpriteEditorWindow(QWidget *parent) :
             this, &SpriteEditorWindow::deleteFrame);
     connect(ui->showPreviewButton, &QPushButton::pressed,
             this, &SpriteEditorWindow::showPreview);
-    connect(ui->colorPaletteButton, &QPushButton::pressed,
-            this, &SpriteEditorWindow::showColorPalette);
-
 }
 
 SpriteEditorWindow::~SpriteEditorWindow()
@@ -128,15 +124,16 @@ void SpriteEditorWindow::showPreview()
     model.showPreview();
 }
 
-void SpriteEditorWindow::showColorPalette()
+void SpriteEditorWindow::on_colorPaletteButton_clicked()
 {
     QColor color = QColorDialog::getColor(Qt::white, this, "Select Color");
-    if (color.isValid()){
+    if (color.isValid())
+    {
         QPalette palette = ui->colorPaletteButton->palette();
         palette.setColor(ui->colorPaletteButton->backgroundRole(), color);
         palette.setColor(ui->colorPaletteButton->foregroundRole(), color);
         ui->colorPaletteButton->setAutoFillBackground(true);
         ui->colorPaletteButton->setPalette(palette);
-        //TODO: Method to send in the QColor value.
+        ui->canvasWidget->setPenColor(color);
     }
 }

@@ -7,6 +7,7 @@
 #endif
 #endif
 
+#include "iostream"
 #include "scribblearea.h"
 //#include <QMouseEvent>
 //#include <QPainter>
